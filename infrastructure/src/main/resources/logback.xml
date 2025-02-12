@@ -1,0 +1,44 @@
+<configuration>
+    <import class="ch.qos.logback.core.ConsoleAppender" />
+    <import class="ch.qos.logback.core.FileAppender" />
+    <import class="ch.qos.logback.classic.encoder.PatternLayoutEncoder" />
+
+<!--    <appender name="OTEL" class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender">-->
+<!--        <captureExperimentalAttributes>true</captureExperimentalAttributes>-->
+<!--        <captureCodeAttributes>true</captureCodeAttributes>-->
+<!--        <captureMarkerAttribute>true</captureMarkerAttribute>-->
+<!--        <captureKeyValuePairAttributes>true</captureKeyValuePairAttributes>-->
+<!--        <captureMdcAttributes>*</captureMdcAttributes>-->
+<!--    </appender>-->
+
+<!--    <appender name="stdout_plain" class="ConsoleAppender">-->
+<!--        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder"> &lt;!&ndash; https://www.codelord.net/2010/08/27/logging-with-a-context-users-in-logback-and-spring-security/ &ndash;&gt;-->
+<!--            <layout class="com.kaua.template.infrastructure.configurations.logback.PatternLayoutWithAttributes">-->
+<!--                <pattern> &lt;!&ndash; https://github.com/onready/demo-spring-security-logging-pattern &ndash;&gt;-->
+<!--                    %d{HH:mm:ss.SSSZZ} [%thread] [%X{traceId}] [%X{spanId}] [%user] %-5level %logger{36} - %msg%n-->
+<!--                </pattern>-->
+<!--            </layout>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+    <appender name="stdout_plain" class="ConsoleAppender">
+        <encoder class="PatternLayoutEncoder">
+            <pattern>
+                %d{HH:mm:ss.SSSZZ} [%thread] [%X{traceId}] [%X{spanId}] %-5level %logger{36} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <logger name="ch.qos.logback" level="WARN" />
+    <logger name="org.mortbay.log" level="WARN" />
+    <logger name="org.springframework" level="INFO" />
+    <logger name="org.springframework.beans" level="WARN" />
+
+    <!-- enable DEBUG only for the application -->
+    <logger name="store" level="DEBUG" />
+
+    <root level="INFO">
+<!--        <appender-ref ref="OTEL" />-->
+        <appender-ref ref="stdout_plain" />
+    </root>
+</configuration>
