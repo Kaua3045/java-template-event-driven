@@ -22,4 +22,13 @@ class NoStackTraceExceptionTest extends UnitTest {
         Assertions.assertEquals("message", exception.getMessage());
         Assertions.assertEquals(cause, exception.getCause());
     }
+
+    @Test
+    void testCallNoStacktraceExceptionWithNullMessage() {
+        final var cause = new RuntimeException();
+        final var exception = new NoStackTraceException(null, cause);
+
+        Assertions.assertNull(exception.getMessage());
+        Assertions.assertEquals(cause, exception.getCause());
+    }
 }
