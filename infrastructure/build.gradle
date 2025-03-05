@@ -66,6 +66,8 @@ jacocoTestReport {
                     fileTree(dir: it, exclude: [
                             'om/kaua/template/event/infrastructure/configurations/*',
                             'om/kaua/template/event/infrastructure/es/*',
+                            'com/kaua/event/driven/infrastructure/uow/*',
+                            'com/kaua/event/driven/infrastructure/exceptions/*',
                             'om/kaua/template/event/infrastructure/Main.class'
                     ])
                 })
@@ -89,6 +91,8 @@ testCodeCoverageReport {
                     fileTree(dir: it, exclude: [
                             'com/kaua/event/driven/infrastructure/configurations/*',
                             'com/kaua/event/driven/infrastructure/es/*',
+                            'com/kaua/event/driven/infrastructure/uow/*',
+                            'com/kaua/event/driven/infrastructure/exceptions/*',
                             'com/kaua/event/driven/infrastructure/Main.class'
                     ])
                 })
@@ -103,6 +107,8 @@ jacocoTestCoverageVerification {
                     fileTree(dir: it, exclude: [
                             'com/kaua/event/driven/infrastructure/configurations/*',
                             'com/kaua/event/driven/infrastructure/es/*',
+                            'com/kaua/event/driven/infrastructure/uow/*',
+                            'com/kaua/event/driven/infrastructure/exceptions/*',
                             'com/kaua/event/driven/infrastructure/Main.class'
                     ])
                 })
