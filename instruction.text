@@ -1,0 +1,1582 @@
+1. CommandGatewayImpl chama o EventSourcedAggregate (que é o agregado baseado em eventos) para executar o comando.
+2. Dentro desse código chamamos o event store para ler os eventos
+3. Lemos os eventos, após ter todos os eventos chamamos o EventSourcedAggregate initialize (with aggregatefactory create aggregate root, etc.)
+4. O aggregateRoot (event sourced aggregate) inicializa o state
+
+16:43:51.021-0300 [undertow-0] [] [] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+16:43:51.022-0300 [undertow-0] [] [] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+16:43:51.041-0300 [undertow-0] [] [] DEBUG c.k.e.d.i.e.c.CommandGatewayImpl - Sending command: CreateOrderCommand[commandId=2b868dd2-6998-48a0-9a32-9848550cbfc3, commandType=CreateOrderCommand, occurredOn=2025-02-23T19:43:51.041654Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=0, traceId=daf05ee1-1d17-42f9-84ea-e60057429c69, description=123]
+Hibernate: select ee1_0.event_id,ee1_0.aggregate_id,ee1_0.aggregate_version,ee1_0.data,ee1_0.published,ee1_0.type from events ee1_0 where ee1_0.aggregate_id=?
+[]
+isEmpty
+e com.kaua.event.driven.domain.exceptions.NotFoundException: Aggregate with identifier 49abc777-01d7-41ab-a5af-9e0de16f6917 not found
+clazz class com.kaua.event.driven.infrastructure.es.aggregates.EventSourcedAggregate
+class com.kaua.event.driven.infrastructure.es.tests.OrderAggregate
+16:43:51.142-0300 [undertow-0] [] [] DEBUG c.k.e.d.i.e.a.AnnotatedAggregate - Handling message: CreateOrderCommand[commandId=2b868dd2-6998-48a0-9a32-9848550cbfc3, commandType=CreateOrderCommand, occurredOn=2025-02-23T19:43:51.041654Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=0, traceId=daf05ee1-1d17-42f9-84ea-e60057429c69, description=123]
+16:43:51.142-0300 [undertow-0] [] [] DEBUG c.k.e.d.i.e.a.AnnotatedAggregate - aqui 1
+16:43:51.142-0300 [undertow-0] [] [] DEBUG c.k.e.d.i.es.scope.Scope - Starting scope: com.kaua.event.driven.infrastructure.es.aggregates.EventSourcedAggregate@6e34daf5
+16:43:51.142-0300 [undertow-0] [] [] DEBUG c.k.e.d.i.es.tests.OrderAggregate - Handling CreateOrderCommand: CreateOrderCommand[commandId=2b868dd2-6998-48a0-9a32-9848550cbfc3, commandType=CreateOrderCommand, occurredOn=2025-02-23T19:43:51.041654Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=0, traceId=daf05ee1-1d17-42f9-84ea-e60057429c69, description=123]
+16:43:51.143-0300 [undertow-0] [] [] DEBUG c.k.e.d.i.es.tests.OrderAggregate - Handling OrderCreatedEvent: OrderCreatedEvent[eventId=3cb4707b-e62b-4893-aff1-e258478bfa4e, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-02-23T19:43:51.143015237Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=0, source=OrderService, traceId=traceId, description=123]
+Hibernate: select ee1_0.event_id,ee1_0.aggregate_id,ee1_0.aggregate_version,ee1_0.data,ee1_0.published,ee1_0.type from events ee1_0 where ee1_0.event_id=?
+Hibernate: insert into events (aggregate_id,aggregate_version,data,published,type,event_id) values (?,?,?,?,?,?)
+16:43:51.202-0300 [undertow-0] [] [] DEBUG c.k.e.d.i.es.jpa.EventStoreTwo - Event saved: OrderCreatedEvent[eventId=3cb4707b-e62b-4893-aff1-e258478bfa4e, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-02-23T19:43:51.143015237Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=0, source=OrderService, traceId=traceId, description=123]
+16:43:51.202-0300 [undertow-0] [] [] DEBUG c.k.e.d.i.e.e.AbstractEventBus - Handling event OrderCreatedEvent[eventId=3cb4707b-e62b-4893-aff1-e258478bfa4e, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-02-23T19:43:51.143015237Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=0, source=OrderService, traceId=traceId, description=123]
+16:43:51.202-0300 [undertow-0] [] [] DEBUG c.k.e.d.i.e.e.AbstractEventBus - Publishing event OrderCreatedEvent[eventId=3cb4707b-e62b-4893-aff1-e258478bfa4e, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-02-23T19:43:51.143015237Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=0, source=OrderService, traceId=traceId, description=123] for other handlers
+16:43:51.202-0300 [undertow-0] [] [] DEBUG c.k.e.d.i.es.scope.Scope - Clearing out ThreadLocal current Scope, as no Scopes are present
+16:44:12.185-0300 [undertow-1] [] [] DEBUG c.k.e.d.i.e.c.CommandGatewayImpl - Sending command: UpdateOrderCommand[commandId=3a02699f-b094-4fc4-a5d1-3a88733f2fa5, commandType=UpdateOrderCommand, occurredOn=2025-02-23T19:44:12.185351Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=0, traceId=5e6b4e33-b0c7-403d-8175-c9d76e24be58, description=456]
+Hibernate: select ee1_0.event_id,ee1_0.aggregate_id,ee1_0.aggregate_version,ee1_0.data,ee1_0.published,ee1_0.type from events ee1_0 where ee1_0.aggregate_id=?
+[OrderCreatedEvent[eventId=3cb4707b-e62b-4893-aff1-e258478bfa4e, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-02-23T19:43:51.143015237Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=0, source=OrderService, traceId=traceId, description=123]]
+16:44:12.209-0300 [undertow-1] [] [] DEBUG c.k.e.d.i.e.a.AnnotatedAggregate - Handling message: OrderCreatedEvent[eventId=3cb4707b-e62b-4893-aff1-e258478bfa4e, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-02-23T19:43:51.143015237Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=0, source=OrderService, traceId=traceId, description=123]
+16:44:12.209-0300 [undertow-1] [] [] DEBUG c.k.e.d.i.e.a.AnnotatedAggregate - aqui 1
+16:44:12.209-0300 [undertow-1] [] [] DEBUG c.k.e.d.i.es.scope.Scope - Starting scope: com.kaua.event.driven.infrastructure.es.aggregates.EventSourcedAggregate@5669ac2d
+16:44:12.209-0300 [undertow-1] [] [] DEBUG c.k.e.d.i.es.tests.OrderAggregate - Handling OrderCreatedEvent: OrderCreatedEvent[eventId=3cb4707b-e62b-4893-aff1-e258478bfa4e, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-02-23T19:43:51.143015237Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=0, source=OrderService, traceId=traceId, description=123]
+16:44:12.209-0300 [undertow-1] [] [] DEBUG c.k.e.d.i.es.scope.Scope - Clearing out ThreadLocal current Scope, as no Scopes are present
+aggregate com.kaua.event.driven.infrastructure.es.aggregates.EventSourcedAggregate@5669ac2d
+ar com.kaua.event.driven.infrastructure.es.aggregates.EventSourcedAggregate@5669ac2d
+ar2 class com.kaua.event.driven.infrastructure.es.tests.OrderAggregate
+clazz class com.kaua.event.driven.infrastructure.es.aggregates.EventSourcedAggregate
+class com.kaua.event.driven.infrastructure.es.tests.OrderAggregate
+16:44:12.209-0300 [undertow-1] [] [] DEBUG c.k.e.d.i.e.a.AnnotatedAggregate - Handling message: UpdateOrderCommand[commandId=3a02699f-b094-4fc4-a5d1-3a88733f2fa5, commandType=UpdateOrderCommand, occurredOn=2025-02-23T19:44:12.185351Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=0, traceId=5e6b4e33-b0c7-403d-8175-c9d76e24be58, description=456]
+16:44:12.209-0300 [undertow-1] [] [] DEBUG c.k.e.d.i.e.a.AnnotatedAggregate - aqui 1
+16:44:12.209-0300 [undertow-1] [] [] DEBUG c.k.e.d.i.es.scope.Scope - Starting scope: com.kaua.event.driven.infrastructure.es.aggregates.EventSourcedAggregate@5669ac2d
+16:44:12.209-0300 [undertow-1] [] [] DEBUG c.k.e.d.i.es.tests.OrderAggregate - Handling UpdateOrderCommand: UpdateOrderCommand[commandId=3a02699f-b094-4fc4-a5d1-3a88733f2fa5, commandType=UpdateOrderCommand, occurredOn=2025-02-23T19:44:12.185351Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=0, traceId=5e6b4e33-b0c7-403d-8175-c9d76e24be58, description=456]
+16:44:12.210-0300 [undertow-1] [] [] DEBUG c.k.e.d.i.es.tests.OrderAggregate - Handling OrderUpdatedEvent: OrderUpdatedEvent[eventId=4a4e7914-7b04-4e31-96e0-7791b8fda809, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderUpdatedEvent, occurredOn=2025-02-23T19:44:12.210072298Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=1, source=OrderService, traceId=traceId, description=456]
+Hibernate: select ee1_0.event_id,ee1_0.aggregate_id,ee1_0.aggregate_version,ee1_0.data,ee1_0.published,ee1_0.type from events ee1_0 where ee1_0.event_id=?
+Hibernate: insert into events (aggregate_id,aggregate_version,data,published,type,event_id) values (?,?,?,?,?,?)
+16:44:12.215-0300 [undertow-1] [] [] DEBUG c.k.e.d.i.es.jpa.EventStoreTwo - Event saved: OrderUpdatedEvent[eventId=4a4e7914-7b04-4e31-96e0-7791b8fda809, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderUpdatedEvent, occurredOn=2025-02-23T19:44:12.210072298Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=1, source=OrderService, traceId=traceId, description=456]
+16:44:12.215-0300 [undertow-1] [] [] DEBUG c.k.e.d.i.e.e.AbstractEventBus - Handling event OrderUpdatedEvent[eventId=4a4e7914-7b04-4e31-96e0-7791b8fda809, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderUpdatedEvent, occurredOn=2025-02-23T19:44:12.210072298Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=1, source=OrderService, traceId=traceId, description=456]
+16:44:12.215-0300 [undertow-1] [] [] DEBUG c.k.e.d.i.e.e.AbstractEventBus - Publishing event OrderUpdatedEvent[eventId=4a4e7914-7b04-4e31-96e0-7791b8fda809, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderUpdatedEvent, occurredOn=2025-02-23T19:44:12.210072298Z, aggregateId=49abc777-01d7-41ab-a5af-9e0de16f6917, aggregateVersion=1, source=OrderService, traceId=traceId, description=456] for other handlers
+16:44:12.215-0300 [undertow-1] [] [] DEBUG c.k.e.d.i.es.scope.Scope - Clearing out ThreadLocal current Scope, as no Scopes are present
+
+Faça uma implementação propria que atinga o mesmo resultado do que essa do axon, a implementação deve ser completa:
+public interface UnitOfWork<T extends Message<?>> {
+
+    void start();
+    void commit();
+
+    default void rollback() {
+        rollback(null);
+    }
+
+    void rollback(Throwable cause);
+
+    default boolean isActive() {
+        return phase().isStarted();
+    }
+
+    Phase phase();
+
+    void onPrepareCommit(Consumer<UnitOfWork<T>> handler);
+    void onCommit(Consumer<UnitOfWork<T>> handler);
+    void afterCommit(Consumer<UnitOfWork<T>> handler);
+    void onRollback(Consumer<UnitOfWork<T>> handler);
+    void onCleanup(Consumer<UnitOfWork<T>> handler);
+
+    Optional<UnitOfWork<?>> parent();
+
+    default boolean isRoot() {
+        return !parent().isPresent();
+    }
+
+    default UnitOfWork<?> root() {
+        return parent().map(UnitOfWork::root).orElse((UnitOfWork) this);
+    }
+
+    T getMessage();
+    UnitOfWork<T> transformMessage(Function<T, ? extends Message<?>> transformOperator);
+    MetaData getCorrelationData();
+    void registerCorrelationDataProvider(CorrelationDataProvider correlationDataProvider);
+    Map<String, Object> resources();
+
+    @SuppressWarnings("unchecked")
+    default <R> R getResource(String name) {
+        return (R) resources().get(name);
+    }
+
+    @SuppressWarnings("unchecked")
+    default <R> R getOrComputeResource(String key, Function<? super String, R> mappingFunction) {
+        return (R) resources().computeIfAbsent(key, mappingFunction);
+    }
+
+    @SuppressWarnings("unchecked")
+    default <R> R getOrDefaultResource(String key, R defaultValue) {
+        return (R) resources().getOrDefault(key, defaultValue);
+    }
+
+    default void attachTransaction(TransactionManager transactionManager) {
+        try {
+            Transaction transaction = transactionManager.startTransaction();
+            onCommit(u -> transaction.commit());
+            onRollback(u -> transaction.rollback());
+        } catch (Throwable t) {
+            rollback(t);
+            throw t;
+        }
+    }
+
+    default void execute(Runnable task) {
+        execute(task, RollbackConfigurationType.ANY_THROWABLE);
+    }
+
+    default void execute(Runnable task, RollbackConfiguration rollbackConfiguration) {
+        ResultMessage<?> resultMessage = executeWithResult(() -> {
+            task.run();
+            return null;
+        }, rollbackConfiguration);
+        if (resultMessage.isExceptional()) {
+            throw (RuntimeException) resultMessage.exceptionResult();
+        }
+    }
+
+    default <R> ResultMessage<R> executeWithResult(Callable<R> task) {
+        return executeWithResult(task, RollbackConfigurationType.ANY_THROWABLE);
+    }
+}
+public abstract class AbstractUnitOfWork<T extends Message<?>> implements UnitOfWork<T> {
+
+    private static final Logger logger = LoggerFactory.getLogger(AbstractUnitOfWork.class);
+    private final Map<String, Object> resources = new HashMap<>();
+    private final Collection<CorrelationDataProvider> correlationDataProviders = new LinkedHashSet<>();
+    private UnitOfWork<?> parentUnitOfWork;
+    private Phase phase = Phase.NOT_STARTED;
+    private boolean rolledBack;
+
+    @Override
+    public void start() {
+        if (logger.isDebugEnabled()) {
+            logger.debug("Starting Unit Of Work");
+        }
+        Assert.state(Phase.NOT_STARTED.equals(phase()), () -> "UnitOfWork is already started");
+        rolledBack = false;
+        onRollback(u -> rolledBack = true);
+        CurrentUnitOfWork.ifStarted(parent -> {
+            // we're nesting.
+            this.parentUnitOfWork = parent;
+            root().onCleanup(r -> changePhase(Phase.CLEANUP, Phase.CLOSED));
+        });
+        changePhase(Phase.STARTED);
+        CurrentUnitOfWork.set(this);
+    }
+
+    @Override
+    public void commit() {
+        if (logger.isDebugEnabled()) {
+            logger.debug("Committing Unit Of Work");
+        }
+        Assert.state(phase() == Phase.STARTED, () -> String.format("The UnitOfWork is in an incompatible phase: %s", phase()));
+        Assert.state(isCurrent(), () -> "The UnitOfWork is not the current Unit of Work");
+        try {
+            if (isRoot()) {
+                commitAsRoot();
+            } else {
+                commitAsNested();
+            }
+        } finally {
+            CurrentUnitOfWork.clear(this);
+        }
+    }
+
+    private void commitAsRoot() {
+        try {
+            try {
+                changePhase(Phase.PREPARE_COMMIT, Phase.COMMIT);
+            } catch (Exception e) {
+                setRollbackCause(e);
+                changePhase(Phase.ROLLBACK);
+                throw e;
+            }
+            if (phase() == Phase.COMMIT) {
+                changePhase(Phase.AFTER_COMMIT);
+            }
+        } finally {
+            changePhase(Phase.CLEANUP, Phase.CLOSED);
+        }
+    }
+
+    private void commitAsNested() {
+        try {
+            changePhase(Phase.PREPARE_COMMIT, Phase.COMMIT);
+            delegateAfterCommitToParent(this);
+            parentUnitOfWork.onRollback(u -> changePhase(Phase.ROLLBACK));
+        } catch (Exception e) {
+            setRollbackCause(e);
+            changePhase(Phase.ROLLBACK);
+            throw e;
+        }
+    }
+
+    private void delegateAfterCommitToParent(UnitOfWork<?> uow) {
+        Optional<UnitOfWork<?>> parent = uow.parent();
+        if (parent.isPresent()) {
+            parent.get().afterCommit(this::delegateAfterCommitToParent);
+        } else {
+            changePhase(Phase.AFTER_COMMIT);
+        }
+    }
+
+    @Override
+    public void rollback(Throwable cause) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("Rolling back Unit Of Work.", cause);
+        }
+        Assert.state(isActive() && phase().isBefore(Phase.ROLLBACK),
+                     () -> String.format("The UnitOfWork is in an incompatible phase: %s", phase()));
+        Assert.state(isCurrent(), () -> "The UnitOfWork is not the current Unit of Work");
+        try {
+            setRollbackCause(cause);
+            changePhase(Phase.ROLLBACK);
+            if (isRoot()) {
+                changePhase(Phase.CLEANUP, Phase.CLOSED);
+            }
+        } finally {
+            CurrentUnitOfWork.clear(this);
+        }
+    }
+
+    @Override
+    public Optional<UnitOfWork<?>> parent() {
+        return Optional.ofNullable(parentUnitOfWork);
+    }
+
+    @Override
+    public Map<String, Object> resources() {
+        return resources;
+    }
+
+    @Override
+    public boolean isRolledBack() {
+        return rolledBack;
+    }
+
+    @Override
+    public void registerCorrelationDataProvider(CorrelationDataProvider correlationDataProvider) {
+        correlationDataProviders.add(correlationDataProvider);
+    }
+
+    @Override
+    public MetaData getCorrelationData() {
+        if (correlationDataProviders.isEmpty()) {
+            return MetaData.emptyInstance();
+        }
+        Map<String, Object> result = new HashMap<>();
+        for (CorrelationDataProvider correlationDataProvider : correlationDataProviders) {
+            try {
+                final Map<String, ?> extraData = correlationDataProvider.correlationDataFor(getMessage());
+                if (extraData != null) {
+                    result.putAll(extraData);
+                }
+            } catch (Exception e) {
+                logger.warn(
+                        "Encountered exception creating correlation data for message with id: '{}' "
+                                + "using correlation provider with class: '{}'"
+                                + "will continue without as this might otherwise prevent a rollback.",
+                        getMessage().getIdentifier(),
+                        correlationDataProvider.getClass(),
+                        e);
+            }
+        }
+        return MetaData.from(result);
+    }
+
+    @Override
+    public void onPrepareCommit(Consumer<UnitOfWork<T>> handler) {
+        addHandler(Phase.PREPARE_COMMIT, handler);
+    }
+
+    @Override
+    public void onCommit(Consumer<UnitOfWork<T>> handler) {
+        addHandler(Phase.COMMIT, handler);
+    }
+
+    @Override
+    public void afterCommit(Consumer<UnitOfWork<T>> handler) {
+        addHandler(Phase.AFTER_COMMIT, handler);
+    }
+
+    @Override
+    public void onRollback(Consumer<UnitOfWork<T>> handler) {
+        addHandler(Phase.ROLLBACK, handler);
+    }
+
+    @Override
+    public void onCleanup(Consumer<UnitOfWork<T>> handler) {
+        addHandler(Phase.CLEANUP, handler);
+    }
+
+    @Override
+    public Phase phase() {
+        return phase;
+    }
+
+    protected void setPhase(Phase phase) {
+        this.phase = phase;
+    }
+    protected void changePhase(Phase... phases) {
+        for (Phase phase : phases) {
+            setPhase(phase);
+            notifyHandlers(phase);
+        }
+    }
+    protected Collection<CorrelationDataProvider> correlationDataProviders() {
+        return correlationDataProviders;
+    }
+    protected abstract void notifyHandlers(Phase phase);
+    protected abstract void addHandler(Phase phase, Consumer<UnitOfWork<T>> handler);
+    protected abstract void setExecutionResult(ExecutionResult executionResult);
+    protected abstract void setRollbackCause(Throwable cause);
+}
+public class MessageProcessingContext<T extends Message<?>> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MessageProcessingContext.class);
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+    private static final Deque EMPTY = new LinkedList<>();
+
+    private final EnumMap<Phase, Deque<Consumer<UnitOfWork<T>>>> handlers = new EnumMap<>(Phase.class);
+    private T message;
+    private ExecutionResult executionResult;
+
+    public MessageProcessingContext(T message) {
+        this.message = message;
+    }
+    @SuppressWarnings("unchecked")
+    public void notifyHandlers(UnitOfWork<T> unitOfWork, Phase phase) {
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Notifying handlers for phase {}", phase.toString());
+        }
+        Deque<Consumer<UnitOfWork<T>>> l = handlers.getOrDefault(phase, EMPTY);
+        while (!l.isEmpty()) {
+            try {
+                l.remove().accept(unitOfWork);
+            } catch (Exception e) {
+                if (phase.isSuppressHandlerErrors()) {
+                    LOGGER.info("An error occurred while executing a lifecycle phase handler for phase {}", phase, e);
+                } else {
+                    throw e;
+                }
+            }
+        }
+    }
+    public void addHandler(Phase phase, Consumer<UnitOfWork<T>> handler) {
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Adding handler {} for phase {}", handler.getClass().getName(), phase.toString());
+        }
+        final Deque<Consumer<UnitOfWork<T>>> consumers = handlers.computeIfAbsent(phase, p -> new ArrayDeque<>());
+        if (phase.isReverseCallbackOrder()) {
+            consumers.addFirst(handler);
+        } else {
+            consumers.add(handler);
+        }
+    }
+    @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
+    public void setExecutionResult(ExecutionResult executionResult) {
+        Assert.state(this.executionResult == null || executionResult.isExceptionResult(),
+                     () -> String.format("Cannot change execution result [%s] to [%s] for message [%s].",
+                        this.executionResult, executionResult, message));
+        if (this.executionResult != null && this.executionResult.isExceptionResult()) {
+            this.executionResult.getExceptionResult().addSuppressed(executionResult.getExceptionResult());
+        } else {
+            this.executionResult = executionResult;
+        }
+    }
+    public T getMessage() {
+        return message;
+    }
+    public ExecutionResult getExecutionResult() {
+        return executionResult;
+    }
+    public void transformMessage(Function<T, ? extends Message<?>> transformOperator) {
+        message = (T) transformOperator.apply(message);
+    }
+    public void reset(T message) {
+        this.message = message;
+        handlers.clear();
+        executionResult = null;
+    }
+}
+public abstract class DisruptorUnitOfWork<T extends Message<?>> extends AbstractUnitOfWork<T> {
+
+    private MessageProcessingContext<T> processingContext;
+
+    public void reset(T message) {
+        if (processingContext == null) {
+            processingContext = new MessageProcessingContext<>(message);
+        } else {
+            processingContext.reset(message);
+        }
+        setPhase(Phase.NOT_STARTED);
+        resources().clear();
+        correlationDataProviders().clear();
+    }
+    public void pause() {
+        CurrentUnitOfWork.clear(this);
+    }
+    public void resume() {
+        CurrentUnitOfWork.set(this);
+    }
+
+    @Override
+    public Optional<UnitOfWork<?>> parent() {
+        return Optional.empty();
+    }
+
+    @Override
+    public T getMessage() {
+        return processingContext.getMessage();
+    }
+
+    @Override
+    public UnitOfWork<T> transformMessage(Function<T, ? extends Message<?>> transformOperator) {
+        processingContext.transformMessage(transformOperator);
+        return this;
+    }
+
+    @Override
+    protected void notifyHandlers(Phase phase) {
+        processingContext.notifyHandlers(this, phase);
+    }
+
+    @Override
+    protected void addHandler(Phase phase, Consumer<UnitOfWork<T>> handler) {
+        processingContext.addHandler(phase, handler);
+    }
+
+    @Override
+    protected void setExecutionResult(ExecutionResult executionResult) {
+        processingContext.setExecutionResult(executionResult);
+    }
+
+    @Override
+    protected void setRollbackCause(Throwable cause) {
+        setExecutionResult(new ExecutionResult(asResultMessage(cause)));
+    }
+    @Override
+    public <R> ResultMessage<R> executeWithResult(Callable<R> task,
+                                                  @Nonnull RollbackConfiguration rollbackConfiguration) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public ExecutionResult getExecutionResult() {
+        return processingContext.getExecutionResult();
+    }
+}
+
+public class DefaultUnitOfWork<T extends Message<?>> extends AbstractUnitOfWork<T> {
+
+    private final MessageProcessingContext<T> processingContext;
+
+    public static <T extends Message<?>> DefaultUnitOfWork<T> startAndGet(T message) {
+        DefaultUnitOfWork<T> uow = new DefaultUnitOfWork<>(message);
+        uow.start();
+        return uow;
+    }
+    public DefaultUnitOfWork(T message) {
+        processingContext = new MessageProcessingContext<>(message);
+    }
+
+    @Override
+    public <R> ResultMessage<R> executeWithResult(Callable<R> task,
+                                                  @Nonnull RollbackConfiguration rollbackConfiguration) {
+        if (phase() == Phase.NOT_STARTED) {
+            start();
+        }
+        Assert.state(phase() == Phase.STARTED,
+                     () -> String.format("The UnitOfWork has an incompatible phase: %s", phase()));
+        R result;
+        ResultMessage<R> resultMessage;
+        try {
+            result = task.call();
+            if (result instanceof ResultMessage) {
+                //noinspection Duplicates
+                resultMessage = (ResultMessage<R>) result;
+            } else if(result instanceof Message) {
+                resultMessage = new GenericResultMessage<>(result, ((Message) result).getMetaData());
+            } else {
+                resultMessage = new GenericResultMessage<>(result);
+            }
+        } catch (Error | Exception e) {
+            resultMessage = asResultMessage(e);
+            if (rollbackConfiguration.rollBackOn(e)) {
+                rollback(e);
+                return resultMessage;
+            }
+        }
+        setExecutionResult(new ExecutionResult(resultMessage));
+        try {
+            commit();
+        } catch (Exception e) {
+            resultMessage = asResultMessage(e);
+        }
+        return resultMessage;
+    }
+
+    @Override
+    protected void setRollbackCause(Throwable cause) {
+        setExecutionResult(new ExecutionResult(new GenericResultMessage<>(cause)));
+    }
+
+    @Override
+    protected void notifyHandlers(Phase phase) {
+        processingContext.notifyHandlers(this, phase);
+    }
+
+    @Override
+    protected void addHandler(Phase phase, Consumer<UnitOfWork<T>> handler) {
+        Assert.state(!phase.isBefore(phase()), () -> "Cannot register a listener for phase: " + phase
+                + " because the Unit of Work is already in a later phase: " + phase());
+        processingContext.addHandler(phase, handler);
+    }
+
+    @Override
+    public T getMessage() {
+        return processingContext.getMessage();
+    }
+
+    @Override
+    public UnitOfWork<T> transformMessage(Function<T, ? extends Message<?>> transformOperator) {
+        processingContext.transformMessage(transformOperator);
+        return this;
+    }
+
+    @Override
+    public ExecutionResult getExecutionResult() {
+        return processingContext.getExecutionResult();
+    }
+
+    @Override
+    protected void setExecutionResult(ExecutionResult executionResult) {
+        processingContext.setExecutionResult(executionResult);
+    }
+}
+
+
+explique se o event sourcing repository vai fazer tudo que as classes abstratas anteriores fazem:
+public class EventSourcingRepository<T> extends LockingRepository<T, EventSourcedAggregate<T>> {
+
+    private final EventStore eventStore;
+    private final SnapshotTriggerDefinition snapshotTriggerDefinition;
+    private final AggregateFactory<T> aggregateFactory;
+    private final RepositoryProvider repositoryProvider;
+    private final Predicate<? super DomainEventMessage<?>> eventStreamFilter;
+
+    protected EventSourcingRepository(Builder<T> builder) {
+        super(builder);
+        this.eventStore = builder.eventStore;
+        this.aggregateFactory = builder.buildAggregateFactory();
+        this.snapshotTriggerDefinition = builder.snapshotTriggerDefinition;
+        this.repositoryProvider = builder.repositoryProvider;
+        this.eventStreamFilter = builder.eventStreamFilter;
+    }
+
+    public static <T> Builder<T> builder(Class<T> aggregateType) {
+        return new Builder<>(aggregateType);
+    }
+    @Override
+    protected EventSourcedAggregate<T> doLoadWithLock(String aggregateIdentifier, Long expectedVersion) {
+        SnapshotTrigger trigger = snapshotTriggerDefinition.prepareTrigger(aggregateFactory.getAggregateType());
+        DomainEventStream eventStream = readEvents(aggregateIdentifier);
+        if (!eventStream.hasNext()) {
+            throw new AggregateNotFoundException(aggregateIdentifier, "The aggregate was not found in the event store");
+        }
+        AggregateModel<T> model = aggregateModel();
+        EventSourcedAggregate<T> aggregate = spanFactory
+                .createInitializeStateSpan(model.type(), aggregateIdentifier)
+                .runSupplier(() -> doLoadAggregate(aggregateIdentifier, trigger, eventStream, model));
+
+        if (aggregate.isDeleted()) {
+            throw new AggregateDeletedException(aggregateIdentifier);
+        }
+        return aggregate;
+    }
+
+    private EventSourcedAggregate<T> doLoadAggregate(String aggregateIdentifier,
+                                                     SnapshotTrigger trigger,
+                                                     DomainEventStream eventStream,
+                                                     AggregateModel<T> model) {
+        EventSourcedAggregate<T> loadingAggregate = EventSourcedAggregate
+                .initialize(aggregateFactory.createAggregateRoot(
+                                    aggregateIdentifier,
+                                    eventStream.peek()),
+                            model,
+                            eventStore,
+                            repositoryProvider,
+                            trigger);
+        loadingAggregate.initializeState(eventStream);
+        return loadingAggregate;
+    }
+
+    protected DomainEventStream readEvents(String aggregateIdentifier) {
+        DomainEventStream fullStream = eventStore.readEvents(aggregateIdentifier);
+        return eventStreamFilter != null ? fullStream.filter(eventStreamFilter) : fullStream;
+    }
+
+    @Override
+    protected void validateOnLoad(Aggregate<T> aggregate, Long expectedVersion) {
+        if (expectedVersion != null && expectedVersion < aggregate.version()) {
+            DefaultConflictResolver conflictResolver =
+                    new DefaultConflictResolver(eventStore, aggregate.identifierAsString(), expectedVersion,
+                                                aggregate.version());
+            ConflictResolution.initialize(conflictResolver);
+            CurrentUnitOfWork.get().onPrepareCommit(uow -> conflictResolver.ensureConflictsResolved());
+        } else {
+            super.validateOnLoad(aggregate, expectedVersion);
+        }
+    }
+
+    @Override
+    protected void reportIllegalState(LockAwareAggregate<T, EventSourcedAggregate<T>> aggregate) {
+        // event sourcing repositories are able to reconstruct the current state
+    }
+
+    @Override
+    protected EventSourcedAggregate<T> doCreateNewForLock(Callable<T> factoryMethod) throws Exception {
+        return EventSourcedAggregate.initialize(factoryMethod, aggregateModel(), eventStore, repositoryProvider,
+                                                snapshotTriggerDefinition.prepareTrigger(getAggregateType()));
+    }
+
+    @Override
+    protected void doSaveWithLock(EventSourcedAggregate<T> aggregate) {
+    }
+
+    @Override
+    protected void doDeleteWithLock(EventSourcedAggregate<T> aggregate) {
+    }
+
+    /**
+     * Returns the factory used by this repository.
+     *
+     * @return the factory used by this repository
+     */
+    public AggregateFactory<T> getAggregateFactory() {
+        return aggregateFactory;
+    }
+}
+
+public abstract class LockingRepository<T, A extends Aggregate<T>> extends
+        AbstractRepository<T, LockAwareAggregate<T, A>> {
+
+    private static final Logger logger = LoggerFactory.getLogger(LockingRepository.class);
+
+    private final LockFactory lockFactory;
+
+    protected LockingRepository(Builder<T> builder) {
+        super(builder);
+        this.lockFactory = builder.lockFactory;
+    }
+
+    @Override
+    protected LockAwareAggregate<T, A> doCreateNew(Callable<T> factoryMethod) throws Exception {
+        UnitOfWork<?> unitOfWork = CurrentUnitOfWork.get();
+        A aggregate = doCreateNewForLock(factoryMethod);
+        final String aggregateIdentifier = aggregate.identifierAsString();
+
+        Supplier<Lock> lockSupplier;
+        if (!Objects.isNull(aggregateIdentifier)) {
+            Lock lock = spanFactory.createObtainLockSpan(aggregateIdentifier)
+                                   .runSupplier(() -> lockFactory.obtainLock(aggregateIdentifier));
+            unitOfWork.onCleanup(u -> lock.release());
+            lockSupplier = () -> lock;
+        } else {
+            // The aggregate identifier hasn't been set yet, so the lock should be created in the supplier.
+            lockSupplier = sameInstanceSupplier(() -> {
+                Lock lock = Objects.isNull(aggregate.identifierAsString())
+                        ? NoOpLock.INSTANCE
+                        : lockFactory.obtainLock(aggregate.identifierAsString());
+                unitOfWork.onCleanup(u -> lock.release());
+                return lock;
+            });
+        }
+
+        return new LockAwareAggregate<>(aggregate, lockSupplier);
+    }
+    protected abstract A doCreateNewForLock(Callable<T> factoryMethod) throws Exception;
+
+    @Override
+    protected LockAwareAggregate<T, A> doLoad(String aggregateIdentifier, Long expectedVersion) {
+        Lock lock = spanFactory.createObtainLockSpan(aggregateIdentifier)
+                               .runSupplier(() -> lockFactory.obtainLock(aggregateIdentifier));
+        try {
+            final A aggregate = doLoadWithLock(aggregateIdentifier, expectedVersion);
+            CurrentUnitOfWork.get().onCleanup(u -> lock.release());
+            return new LockAwareAggregate<>(aggregate, lock);
+        } catch (Throwable ex) {
+            logger.debug("Exception occurred while trying to load an aggregate. Releasing lock.", ex);
+            lock.release();
+            throw ex;
+        }
+    }
+
+    @Override
+    protected LockAwareAggregate<T, A> doLoadOrCreate(String aggregateIdentifier,
+                                                      Callable<T> factoryMethod) throws Exception {
+        Lock lock = spanFactory.createObtainLockSpan(aggregateIdentifier)
+                               .runSupplier(() -> lockFactory.obtainLock(aggregateIdentifier));
+        try {
+            final A aggregate = doLoadWithLock(aggregateIdentifier, null);
+            CurrentUnitOfWork.get().onCleanup(u -> lock.release());
+            return new LockAwareAggregate<>(aggregate, lock);
+        } catch (AggregateNotFoundException ex) {
+            final A aggregate = doCreateNewForLock(factoryMethod);
+            CurrentUnitOfWork.get().onCleanup(u -> lock.release());
+            return new LockAwareAggregate<>(aggregate, lock);
+        } catch (Throwable ex) {
+            logger.debug("Exception occurred while trying to load/create an aggregate. Releasing lock.", ex);
+            lock.release();
+            throw ex;
+        }
+    }
+
+    @Override
+    protected void prepareForCommit(LockAwareAggregate<T, A> aggregate) {
+        Assert.state(aggregate.isLockHeld(), () -> "An aggregate is being used for which a lock is no longer held");
+        super.prepareForCommit(aggregate);
+    }
+
+    /**
+     * Verifies whether all locks are valid and delegates to {@link #doSaveWithLock(Aggregate)} to perform actual
+     * storage.
+     *
+     * @param aggregate the aggregate to store
+     */
+    @Override
+    protected void doSave(LockAwareAggregate<T, A> aggregate) {
+        if (aggregate.version() != null && !aggregate.isLockHeld()) {
+            throw new ConcurrencyException(String.format(
+                    "The aggregate of type [%s] with identifier [%s] could not be " +
+                            "saved, as a valid lock is not held. Either another thread has saved an aggregate, or " +
+                            "the current thread had released its lock earlier on.",
+                    aggregate.getClass().getSimpleName(), aggregate.identifierAsString()));
+        }
+        doSaveWithLock(aggregate.getWrappedAggregate());
+    }
+
+    /**
+     * Verifies whether all locks are valid and delegates to {@link #doDeleteWithLock(Aggregate)} to perform actual
+     * deleting.
+     *
+     * @param aggregate the aggregate to delete
+     */
+    @Override
+    protected final void doDelete(LockAwareAggregate<T, A> aggregate) {
+        if (aggregate.version() != null && !aggregate.isLockHeld()) {
+            throw new ConcurrencyException(String.format(
+                    "The aggregate of type [%s] with identifier [%s] could not be " +
+                            "saved, as a valid lock is not held. Either another thread has saved an aggregate, or " +
+                            "the current thread had released its lock earlier on.",
+                    aggregate.getClass().getSimpleName(), aggregate.identifierAsString()));
+        }
+        doDeleteWithLock(aggregate.getWrappedAggregate());
+    }
+    protected abstract void doDeleteWithLock(A aggregate);
+    protected abstract A doLoadWithLock(String aggregateIdentifier, Long expectedVersion);
+}
+
+public abstract class AbstractRepository<T, A extends Aggregate<T>> implements Repository<T> {
+
+    private static final Logger logger = LoggerFactory.getLogger(AbstractRepository.class);
+
+    private final String aggregatesKey = this + "_AGGREGATES";
+    private final AggregateModel<T> aggregateModel;
+    protected final RepositorySpanFactory spanFactory;
+
+    protected AbstractRepository(Builder<T> builder) {
+        builder.validate();
+        this.aggregateModel = builder.buildAggregateModel();
+        this.spanFactory = builder.spanFactory;
+    }
+
+    @Override
+    public A newInstance(@Nonnull Callable<T> factoryMethod) throws Exception {
+        return newInstance(factoryMethod, a -> {});
+    }
+
+    @Override
+    public A newInstance(@Nonnull Callable<T> factoryMethod,
+                         @Nonnull Consumer<Aggregate<T>> initMethod) throws Exception {
+        UnitOfWork<?> uow = currentUnitOfWork();
+        AtomicReference<A> aggregateReference = new AtomicReference<>();
+        // a constructor may apply events, and the persistence of an aggregate must take precedence over publishing its events.
+        uow.onPrepareCommit(x -> {
+            A aggregate = aggregateReference.get();
+            // Aggregate construction may have failed with an exception (aggregate == null)
+            //  or the handler decided not to create the aggregate (identifier == null).
+            // In that case, no action is required on commit.
+            if (aggregate != null && aggregate.identifier() != null) {
+                prepareForCommit(aggregate);
+            }
+        });
+
+        A aggregate;
+        try {
+            aggregate = doCreateNew(factoryMethod);
+        } catch (Exception e) {
+            logger.warn("Exception occurred while trying to create an aggregate.", e);
+            throw e;
+        }
+
+        initMethod.accept(aggregate);
+        aggregateReference.set(aggregate);
+        Assert.isTrue(aggregateModel.entityClass().isAssignableFrom(aggregate.rootType()),
+                      () -> "Unsuitable aggregate for this repository: wrong type");
+        Map<String, A> aggregates = managedAggregates(uow);
+        Assert.isTrue(aggregates.putIfAbsent(aggregate.identifierAsString(), aggregate) == null,
+                      () -> "The Unit of Work already has an Aggregate with the same identifier");
+        uow.onRollback(u -> aggregates.remove(aggregate.identifierAsString()));
+
+        return aggregate;
+    }
+
+    protected abstract A doCreateNew(Callable<T> factoryMethod) throws Exception;
+
+    @Override
+    public A load(@Nonnull String aggregateIdentifier, Long expectedVersion) {
+        return spanFactory.createLoadSpan(aggregateIdentifier)
+                          .runSupplier(() -> {
+                              UnitOfWork<?> uow = currentUnitOfWork();
+                              Map<String, A> aggregates = managedAggregates(uow);
+                              A aggregate = aggregates.computeIfAbsent(
+                                      aggregateIdentifier, s -> {
+                                          try {
+                                              return doLoad(aggregateIdentifier, expectedVersion);
+                                          } catch (Exception e) {
+                                              logger.warn("Exception occurred while trying to load a aggregate "
+                                                                  + "with identifier [{}].", aggregateIdentifier, e);
+                                              throw e;
+                                          }
+                                      }
+                              );
+                              uow.onRollback(u -> aggregates.remove(aggregateIdentifier));
+                              validateOnLoad(aggregate, expectedVersion);
+                              prepareForCommit(aggregate);
+
+                              return aggregate;
+                          });
+    }
+
+
+    @Override
+    public Aggregate<T> loadOrCreate(@Nonnull String aggregateIdentifier, @Nonnull Callable<T> factoryMethod) {
+        UnitOfWork<?> uow = currentUnitOfWork();
+        Map<String, A> aggregates = managedAggregates(uow);
+        A aggregate = aggregates.computeIfAbsent(
+                aggregateIdentifier,
+                s -> {
+                    try {
+                        return doLoadOrCreate(aggregateIdentifier,
+                                              factoryMethod);
+                    } catch (RuntimeException e) {
+                        logger.warn("Exception occurred while trying to load/create aggregate with identifier [{}].",
+                                    aggregateIdentifier, e);
+                        throw e;
+                    } catch (Exception e) {
+                        logger.warn("Exception occurred while trying to load/create aggregate with identifier [{}].",
+                                    aggregateIdentifier, e);
+                        throw new RuntimeException(e);
+                    }
+                }
+        );
+        uow.onRollback(u -> aggregates.remove(aggregateIdentifier));
+        prepareForCommit(aggregate);
+
+        return aggregate;
+    }
+
+    private UnitOfWork<?> currentUnitOfWork() {
+        UnitOfWork<?> uow = CurrentUnitOfWork.get();
+        Class<?> messageType = uow.getMessage() != null ? uow.getMessage().getClass() : null;
+        if (invalidMessageType(messageType)) {
+            logger.warn("The active Unit of Work is expected to contain a CommandMessage or a DeadlineMessage, but instead contains a [{}]",
+                        messageType);
+        }
+        return uow;
+    }
+
+    private boolean invalidMessageType(Class<?> messageType) {
+        if (messageType == null) {
+            return false;
+        }
+        if (CommandMessage.class.isAssignableFrom(messageType)) {
+            return false;
+        }
+        return !DeadlineMessage.class.isAssignableFrom(messageType);
+    }
+
+    protected Map<String, A> managedAggregates(UnitOfWork<?> uow) {
+        return uow.root().getOrComputeResource(aggregatesKey, s -> new HashMap<>());
+    }
+
+    @Override
+    public A load(@Nonnull String aggregateIdentifier) {
+        return load(aggregateIdentifier, null);
+    }
+
+    protected void validateOnLoad(Aggregate<T> aggregate, Long expectedVersion) {
+        if (expectedVersion != null && aggregate.version() != null &&
+                !expectedVersion.equals(aggregate.version())) {
+            throw new ConflictingAggregateVersionException(aggregate.identifierAsString(),
+                                                           expectedVersion,
+                                                           aggregate.version());
+        }
+    }
+
+    protected void prepareForCommit(A aggregate) {
+        if (UnitOfWork.Phase.STARTED.isBefore(CurrentUnitOfWork.get().phase())) {
+            doCommit(aggregate);
+        } else {
+            CurrentUnitOfWork.get().onPrepareCommit(u -> {
+                // If the aggregate isn't "managed" anymore, it means its state was invalidated by a rollback
+                doCommit(aggregate);
+            });
+        }
+    }
+
+    private void doCommit(A aggregate) {
+        if (managedAggregates(CurrentUnitOfWork.get()).containsValue(aggregate)) {
+            if (aggregate.isDeleted()) {
+                doDelete(aggregate);
+            } else {
+                doSave(aggregate);
+            }
+            if (aggregate.isDeleted()) {
+                postDelete(aggregate);
+            } else {
+                postSave(aggregate);
+            }
+        } else {
+            reportIllegalState(aggregate);
+        }
+    }
+
+    protected void reportIllegalState(A aggregate) {
+        throw new AggregateRolledBackException(aggregate.identifierAsString());
+    }
+
+    protected AggregateModel<T> aggregateModel() {
+        return aggregateModel;
+    }
+
+    protected Class<? extends T> getAggregateType() {
+        return aggregateModel.entityClass();
+    }
+
+    protected abstract void doSave(A aggregate);
+
+    protected abstract A doLoad(String aggregateIdentifier, Long expectedVersion);
+
+    protected A doLoadOrCreate(String aggregateIdentifier, Callable<T> factoryMethod)
+            throws Exception {
+        throw new UnsupportedOperationException("doLoadOrCreate not implemented for this repository type");
+    }
+
+    protected abstract void doDelete(A aggregate);
+
+    @SuppressWarnings("UnusedParameters")
+    protected void postSave(A aggregate) {
+        //no op by default
+    }
+    @SuppressWarnings("UnusedParameters")
+    protected void postDelete(A aggregate) {
+        //no op by default
+    }
+}
+
+
+
+public class EventSourcedAggregate<T> extends AnnotatedAggregate<T> {
+
+    private final SnapshotTrigger snapshotTrigger;
+    private boolean initializing = false;
+
+    /**
+     * Initializes an EventSourcedAggregate instance for the given {@code aggregateRoot}, based on the given {@code
+     * inspector}, which publishes events to the given {@code eventBus}.
+     *
+     * @param aggregateRoot      The aggregate root instance
+     * @param inspector          The inspector describing the aggregate structure
+     * @param eventBus           The event bus to send generated events to
+     * @param snapshotTrigger    The trigger to notify of events and initialization
+     * @param <T>                the aggregate root type
+     * @return the initialized EventSourcedAggregate instance
+     */
+    public static <T> EventSourcedAggregate<T> initialize(T aggregateRoot, AggregateModel<T> inspector,
+                                                          EventBus eventBus, SnapshotTrigger snapshotTrigger) {
+        return initialize(aggregateRoot, inspector, eventBus, null, snapshotTrigger);
+    }
+
+    /**
+     * Initializes an EventSourcedAggregate instance for the given {@code aggregateRoot}, based on the given {@code
+     * inspector}, which publishes events to the given {@code eventBus}.
+     *
+     * @param aggregateRoot      The aggregate root instance
+     * @param inspector          The inspector describing the aggregate structure
+     * @param eventBus           The event bus to send generated events to
+     * @param repositoryProvider Provides repositories for specific aggregate types
+     * @param snapshotTrigger    The trigger to notify of events and initialization
+     * @param <T>                the aggregate root type
+     * @return the initialized EventSourcedAggregate instance
+     */
+    public static <T> EventSourcedAggregate<T> initialize(T aggregateRoot, AggregateModel<T> inspector,
+                                                          EventBus eventBus, RepositoryProvider repositoryProvider,
+                                                          SnapshotTrigger snapshotTrigger) {
+        return new EventSourcedAggregate<>(aggregateRoot, inspector, eventBus, repositoryProvider, snapshotTrigger);
+    }
+
+    /**
+     * Initializes an EventSourcedAggregate instance using the given {@code aggregateFactory}, based on the given {@code
+     * inspector}, which publishes events to the given {@code eventBus} and stores events in the given {@code
+     * eventStore}.
+     *
+     * @param aggregateFactory The aggregate root factory
+     * @param inspector        The inspector describing the aggregate structure
+     * @param eventBus         The event bus to send generated events to
+     * @param snapshotTrigger  The trigger to notify of events and initialization
+     * @param <T>              the aggregate root type
+     * @return the initialized EventSourcedAggregate instance
+     *
+     * @throws Exception if the aggregate cannot be initialized
+     */
+    public static <T> EventSourcedAggregate<T> initialize(Callable<T> aggregateFactory, AggregateModel<T> inspector,
+                                                          EventBus eventBus, SnapshotTrigger snapshotTrigger)
+            throws Exception {
+        return initialize(aggregateFactory, inspector, eventBus, null, snapshotTrigger);
+    }
+
+    /**
+     * Initializes an EventSourcedAggregate instance using the given {@code aggregateFactory}, based on the given {@code
+     * inspector}, which publishes events to the given {@code eventBus} and stores events in the given {@code
+     * eventStore}.
+     *
+     * @param aggregateFactory   The aggregate root factory
+     * @param inspector          The inspector describing the aggregate structure
+     * @param eventBus           The event bus to send generated events to
+     * @param repositoryProvider Provides repositories for specific aggregate types
+     * @param snapshotTrigger    The trigger to notify of events and initialization
+     * @param <T>                the aggregate root type
+     * @return the initialized EventSourcedAggregate instance
+     *
+     * @throws Exception if the aggregate cannot be initialized
+     */
+    public static <T> EventSourcedAggregate<T> initialize(Callable<T> aggregateFactory, AggregateModel<T> inspector,
+                                                          EventBus eventBus, RepositoryProvider repositoryProvider,
+                                                          SnapshotTrigger snapshotTrigger) throws Exception {
+        EventSourcedAggregate<T> aggregate = new EventSourcedAggregate<>(inspector,
+                                                                         eventBus,
+                                                                         repositoryProvider,
+                                                                         snapshotTrigger);
+        aggregate.registerRoot(aggregateFactory);
+        return aggregate;
+    }
+
+    /**
+     * Reconstructs an EventSourcedAggregate instance with given {@code aggregateRoot}. The aggregate's sequence number
+     * should be set to the given {@code seqNo} and its deleted flag to the given {@code isDeleted}.
+     * <p>
+     * Use this method to initialize an EventSourcedAggregate without having to replay the aggregate from events.
+     *
+     * @param aggregateRoot      The aggregate root instance
+     * @param model              The model describing the aggregate structure
+     * @param seqNo              The last event sequence number of the aggregate
+     * @param isDeleted          Flag to indicate whether or not the aggregate is deleted
+     * @param eventBus           The event bus to send generated events to
+     * @param snapshotTrigger    The trigger to notify of events and initialization
+     * @param <T>                the aggregate root type
+     * @return the reconstructed EventSourcedAggregate instance
+     */
+    public static <T> EventSourcedAggregate<T> reconstruct(T aggregateRoot, AggregateModel<T> model, long seqNo,
+                                                           boolean isDeleted, EventBus eventBus,
+                                                           SnapshotTrigger snapshotTrigger) {
+        return reconstruct(aggregateRoot, model, seqNo, isDeleted, eventBus, null, snapshotTrigger);
+    }
+
+    /**
+     * Reconstructs an EventSourcedAggregate instance with given {@code aggregateRoot}. The aggregate's sequence number
+     * should be set to the given {@code seqNo} and its deleted flag to the given {@code isDeleted}.
+     * <p>
+     * Use this method to initialize an EventSourcedAggregate without having to replay the aggregate from events.
+     *
+     * @param aggregateRoot      The aggregate root instance
+     * @param model              The model describing the aggregate structure
+     * @param seqNo              The last event sequence number of the aggregate
+     * @param isDeleted          Flag to indicate whether or not the aggregate is deleted
+     * @param eventBus           The event bus to send generated events to
+     * @param repositoryProvider Provides repositories for specific aggregate types
+     * @param snapshotTrigger    The trigger to notify of events and initialization
+     * @param <T>                the aggregate root type
+     * @return the reconstructed EventSourcedAggregate instance
+     */
+    public static <T> EventSourcedAggregate<T> reconstruct(T aggregateRoot, AggregateModel<T> model, long seqNo,
+                                                           boolean isDeleted, EventBus eventBus,
+                                                           RepositoryProvider repositoryProvider,
+                                                           SnapshotTrigger snapshotTrigger) {
+        EventSourcedAggregate<T> aggregate = initialize(aggregateRoot,
+                                                        model,
+                                                        eventBus,
+                                                        repositoryProvider,
+                                                        snapshotTrigger);
+        aggregate.initSequence(seqNo);
+        if (isDeleted) {
+            aggregate.doMarkDeleted();
+        }
+        return aggregate;
+    }
+
+    /**
+     * Initializes an Aggregate instance for the given {@code aggregateRoot}, based on the given {@code model}, which
+     * publishes events to the given {@code eventBus}.
+     *
+     * @param aggregateRoot      The aggregate root instance
+     * @param model              The model describing the aggregate structure
+     * @param eventBus           The event store to store generated events in
+     * @param snapshotTrigger    The trigger to notify of events and initialization
+     */
+    protected EventSourcedAggregate(T aggregateRoot, AggregateModel<T> model, EventBus eventBus,
+                                    SnapshotTrigger snapshotTrigger) {
+        super(aggregateRoot, model, eventBus);
+        this.initSequence();
+        this.snapshotTrigger = snapshotTrigger;
+    }
+
+    /**
+     * Initializes an Aggregate instance for the given {@code aggregateRoot}, based on the given {@code model}, which
+     * publishes events to the given {@code eventBus}.
+     *
+     * @param aggregateRoot      The aggregate root instance
+     * @param model              The model describing the aggregate structure
+     * @param eventBus           The event store to store generated events in
+     * @param repositoryProvider Provides repositories for specific aggregate types
+     * @param snapshotTrigger    The trigger to notify of events and initialization
+     */
+    protected EventSourcedAggregate(T aggregateRoot, AggregateModel<T> model, EventBus eventBus,
+                                    RepositoryProvider repositoryProvider, SnapshotTrigger snapshotTrigger) {
+        super(aggregateRoot, model, eventBus, repositoryProvider);
+        this.initSequence();
+        this.snapshotTrigger = snapshotTrigger;
+    }
+
+    /**
+     * Creates a new EventSourcedAggregate instance based on the given {@code model}, which publishes events to the
+     * given {@code eventBus}. This aggregate is not assigned a root instance yet.
+     *
+     * @param model              The model describing the aggregate structure
+     * @param eventBus           The event store to store generated events in
+     * @param snapshotTrigger    The trigger to notify of events and initialization
+     * @see #registerRoot(Callable)
+     */
+    protected EventSourcedAggregate(AggregateModel<T> model, EventBus eventBus, SnapshotTrigger snapshotTrigger) {
+        super(model, eventBus);
+        this.initSequence();
+        this.snapshotTrigger = snapshotTrigger;
+    }
+
+    /**
+     * Creates a new EventSourcedAggregate instance based on the given {@code model}, which publishes events to the
+     * given {@code eventBus}. This aggregate is not assigned a root instance yet.
+     *
+     * @param model              The model describing the aggregate structure
+     * @param eventBus           The event store to store generated events in
+     * @param repositoryProvider Provides repositories for specific aggregate types
+     * @param snapshotTrigger    The trigger to notify of events and initialization
+     * @see #registerRoot(Callable)
+     */
+    protected EventSourcedAggregate(AggregateModel<T> model, EventBus eventBus, RepositoryProvider repositoryProvider,
+                                    SnapshotTrigger snapshotTrigger) {
+        super(model, eventBus, repositoryProvider);
+        this.initSequence();
+        this.snapshotTrigger = snapshotTrigger;
+    }
+
+    @Override
+    public <P> ApplyMore doApply(P payload, MetaData metaData) {
+        if (initializing) {
+            return IgnoreApplyMore.INSTANCE;
+        } else {
+            return super.doApply(payload, metaData);
+        }
+    }
+
+    @Override
+    protected void publish(EventMessage<?> msg) {
+        super.publish(msg);
+        snapshotTrigger.eventHandled(msg);
+        if (identifierAsString() == null && isSnapshotEvent(msg)) {
+            throw new IncompatibleAggregateException(
+                    "Aggregate identifier must be non-null after applying a snapshot. "
+                            + "Make sure the aggregate identifier is included in the snapshot that is used to restore"
+                            + " the aggregate from. "
+                            + "Note the identifier may be missing due to your serializer being unable to find the"
+                            + " private field(s) of your aggregate."
+            );
+        } else if (identifierAsString() == null) {
+            throw new IncompatibleAggregateException("Aggregate identifier must be non-null after applying an event. " +
+                                                             "Make sure the aggregate identifier is initialized at " +
+                                                             "the latest when handling the creation event.");
+        }
+    }
+
+    private boolean isSnapshotEvent(EventMessage<?> event) {
+        return inspector.types().anyMatch(event.getPayloadType()::equals);
+    }
+
+    @Override
+    protected void publishOnEventBus(EventMessage<?> msg) {
+        if (!initializing) {
+            // force conversion of LazyIdentifierDomainEventMessage to Generic to release reference to Aggregate.
+            super.publishOnEventBus(msg.andMetaData(Collections.emptyMap()));
+        }
+    }
+
+    @Override
+    public Long version() {
+        return lastSequence();
+    }
+
+    /**
+     * Initialize the state of this Event Sourced Aggregate with the events from the given {@code eventStream}.
+     *
+     * @param eventStream The Event Stream containing the events to be used to reconstruct this Aggregate's state.
+     */
+    public void initializeState(DomainEventStream eventStream) {
+        execute(r -> {
+            this.initializing = true;
+            try {
+                eventStream.forEachRemaining(this::publish);
+                initSequence(eventStream.getLastSequenceNumber());
+            } finally {
+                this.initializing = false;
+                snapshotTrigger.initializationFinished();
+            }
+        });
+    }
+
+    @Override
+    protected boolean getIsLive() {
+        return !initializing;
+    }
+
+    /**
+     * The trigger instance that monitors this aggregate to trigger a snapshot
+     *
+     * @return the trigger instance assigned to this aggregate instance
+     */
+    public SnapshotTrigger getSnapshotTrigger() {
+        return snapshotTrigger;
+    }
+
+    private static class IgnoreApplyMore implements ApplyMore {
+
+        public static final ApplyMore INSTANCE = new IgnoreApplyMore();
+
+        @Override
+        public ApplyMore andThenApply(Supplier<?> payloadOrMessageSupplier) {
+            return this;
+        }
+
+        @Override
+        public ApplyMore andThen(Runnable runnable) {
+            return this;
+        }
+    }
+}
+
+
+public class AggregateAnnotationCommandHandler<T> implements CommandMessageHandler {
+
+    private final Repository<T> repository;
+    private final CommandTargetResolver commandTargetResolver;
+    private final List<MessageHandler<CommandMessage<?>>> handlers;
+    private final Set<String> supportedCommandNames;
+    private final Map<String, Set<MessageHandler<CommandMessage<?>>>> supportedCommandsByName;
+    private final Map<Class<? extends T>, CreationPolicyAggregateFactory<T>> factoryPerType;
+
+    public static <T> Builder<T> builder() {
+        return new Builder<>();
+    }
+
+    protected AggregateAnnotationCommandHandler(Builder<T> builder) {
+        builder.validate();
+        this.repository = builder.repository;
+        this.commandTargetResolver = builder.commandTargetResolver;
+        this.supportedCommandNames = new HashSet<>();
+        this.supportedCommandsByName = new HashMap<>();
+        AggregateModel<T> aggregateModel = builder.buildAggregateModel();
+        // Suppressing cast to Class<? extends T> as we are definitely dealing with implementations of T.
+        //noinspection unchecked
+        this.factoryPerType = initializeAggregateFactories(
+                aggregateModel.types()
+                              .map(type -> (Class<? extends T>) type)
+                              .collect(Collectors.toList()),
+                builder.creationPolicyAggregateFactory
+        );
+
+        this.handlers = initializeHandlers(aggregateModel);
+    }
+
+    private Map<Class<? extends T>, CreationPolicyAggregateFactory<T>> initializeAggregateFactories(
+            List<Class<? extends T>> aggregateTypes,
+            CreationPolicyAggregateFactory<T> configuredAggregateFactory
+    ) {
+        Map<Class<? extends T>, CreationPolicyAggregateFactory<T>> typeToFactory = new HashMap<>();
+        for (Class<? extends T> aggregateType : aggregateTypes) {
+            typeToFactory.put(aggregateType, configuredAggregateFactory != null
+                    ? configuredAggregateFactory
+                    : new NoArgumentConstructorCreationPolicyAggregateFactory<>(aggregateType)
+            );
+        }
+        return typeToFactory;
+    }
+
+    public Registration subscribe(CommandBus commandBus) {
+        List<Registration> subscriptions = supportedCommandsByName
+                .entrySet()
+                .stream()
+                .flatMap(entry -> entry.getValue().stream().map(
+                        messageHandler -> commandBus.subscribe(entry.getKey(), messageHandler)
+                ))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        return () -> subscriptions.stream().map(Registration::cancel).reduce(Boolean::logicalOr).orElse(false);
+    }
+
+    private List<MessageHandler<CommandMessage<?>>> initializeHandlers(AggregateModel<T> aggregateModel) {
+        List<MessageHandler<CommandMessage<?>>> handlersFound = new ArrayList<>();
+
+        aggregateModel.allCommandHandlers()
+                      .values()
+                      .stream()
+                      .flatMap(List::stream)
+                      .collect(Collectors.groupingBy(this::getHandlerSignature))
+                      .forEach((signature, commandHandlers) -> initializeHandler(
+                              aggregateModel, commandHandlers.get(0), handlersFound
+                      ));
+
+        return handlersFound;
+    }
+
+    private String getHandlerSignature(MessageHandlingMember<? super T> handler) {
+        return handler.unwrap(Executable.class)
+                      .map(ReflectionUtils::toDiscernibleSignature)
+                      .orElseThrow(() -> new IllegalStateException(
+                              "A handler is missing an Executable. Please provide an "
+                                      + "Executable in your MessageHandlingMembers"
+                      ));
+    }
+
+    private void initializeHandler(AggregateModel<T> aggregateModel,
+                                   MessageHandlingMember<? super T> handler,
+                                   List<MessageHandler<CommandMessage<?>>> handlersFound) {
+
+        handler.unwrap(CommandMessageHandlingMember.class).ifPresent(cmh -> {
+            Optional<AggregateCreationPolicy> policy = handler.unwrap(CreationPolicyMember.class)
+                                                              .map(CreationPolicyMember::creationPolicy);
+
+            MessageHandler<CommandMessage<?>> messageHandler = null;
+            if (cmh.isFactoryHandler()) {
+                assertThat(
+                        policy,
+                        p -> p.map(AggregateCreationPolicy.ALWAYS::equals).orElse(true),
+                        aggregateModel.type() + ": Static methods/constructors can only use creationPolicy ALWAYS"
+                );
+                messageHandler = new AggregateConstructorCommandHandler(handler);
+            } else {
+                switch (policy.orElse(NEVER)) {
+                    case ALWAYS:
+                        messageHandler = new AlwaysCreateAggregateCommandHandler(
+                                handler, factoryPerType.get(handler.declaringClass())
+                        );
+                        break;
+                    case CREATE_IF_MISSING:
+                        messageHandler = new AggregateCreateOrUpdateCommandHandler(
+                                handler, factoryPerType.get(handler.declaringClass())
+                        );
+                        break;
+                    case NEVER:
+                        messageHandler = new AggregateCommandHandler(handler);
+                        break;
+                }
+            }
+            handlersFound.add(messageHandler);
+            supportedCommandsByName.computeIfAbsent(cmh.commandName(), key -> new HashSet<>()).add(messageHandler);
+            supportedCommandNames.add(cmh.commandName());
+        });
+    }
+
+    @Override
+    public Object handle(CommandMessage<?> commandMessage) throws Exception {
+        return handlers.stream()
+                       .filter(ch -> ch.canHandle(commandMessage))
+                       .findFirst()
+                       .orElseThrow(() -> new NoHandlerForCommandException(commandMessage))
+                       .handle(commandMessage);
+    }
+
+    @Override
+    public boolean canHandle(CommandMessage<?> message) {
+        return handlers.stream()
+                       .anyMatch(ch -> ch.canHandle(message));
+    }
+
+    protected Object resolveReturnValue(@SuppressWarnings("unused") CommandMessage<?> command,
+                                        Aggregate<T> createdAggregate) {
+        return createdAggregate.identifier();
+    }
+
+    @Override
+    public Set<String> supportedCommandNames() {
+        return supportedCommandNames;
+    }
+
+    private class AggregateConstructorCommandHandler implements MessageHandler<CommandMessage<?>> {
+
+        private final MessageHandlingMember<?> handler;
+
+        public AggregateConstructorCommandHandler(MessageHandlingMember<?> handler) {
+            this.handler = handler;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        public Object handle(CommandMessage<?> command) throws Exception {
+            Aggregate<T> aggregate = repository.newInstance(() -> (T) handler.handle(command, null));
+            return resolveReturnValue(command, aggregate);
+        }
+
+        @Override
+        public boolean canHandle(CommandMessage<?> message) {
+            return handler.canHandle(message);
+        }
+    }
+
+    private class AlwaysCreateAggregateCommandHandler implements MessageHandler<CommandMessage<?>> {
+
+        private final MessageHandlingMember<? super T> handler;
+        private final CreationPolicyAggregateFactory<T> factoryMethod;
+
+        private AlwaysCreateAggregateCommandHandler(MessageHandlingMember<? super T> handler,
+                                                    CreationPolicyAggregateFactory<T> factoryMethod) {
+            this.handler = handler;
+            this.factoryMethod = factoryMethod;
+        }
+
+        @Override
+        public Object handle(CommandMessage<?> command) throws Exception {
+            return handleNewInstanceCreation(command, factoryMethod, handler, resolveNullableAggregateId(command));
+        }
+
+        @Override
+        public boolean canHandle(CommandMessage<?> message) {
+            return handler.canHandle(message);
+        }
+    }
+
+    private class AggregateCreateOrUpdateCommandHandler implements MessageHandler<CommandMessage<?>> {
+
+        private final MessageHandlingMember<? super T> handler;
+        private final CreationPolicyAggregateFactory<T> factoryMethod;
+
+        public AggregateCreateOrUpdateCommandHandler(MessageHandlingMember<? super T> handler,
+                                                     CreationPolicyAggregateFactory<T> factoryMethod) {
+            this.handler = handler;
+            this.factoryMethod = factoryMethod;
+        }
+
+        @Override
+        public Object handle(CommandMessage<?> command) throws Exception {
+            VersionedAggregateIdentifier versionedAggregateIdentifier = resolveNullableAggregateId(command);
+
+            Object result;
+            if (versionedAggregateIdentifier != null) {
+                Aggregate<T> instance = repository.loadOrCreate(
+                        versionedAggregateIdentifier.getIdentifier(),
+                        () -> factoryMethod.create(versionedAggregateIdentifier.getIdentifierValue())
+                );
+                result = instance.handle(command);
+            } else {
+                result = handleNewInstanceCreation(
+                        command, factoryMethod, handler, resolveNullableAggregateId(command)
+                );
+            }
+            return result;
+        }
+
+        @Override
+        public boolean canHandle(CommandMessage<?> message) {
+            return handler.canHandle(message);
+        }
+    }
+
+    private VersionedAggregateIdentifier resolveNullableAggregateId(CommandMessage<?> command) {
+        try {
+            return commandTargetResolver.resolveTarget(command);
+        } catch (IdentifierMissingException e) {
+            // Couldn't find identifier in given command, so defaulting to null.
+            // Assuming it will be set in the command handler.
+            return null;
+        } catch (IllegalArgumentException e) {
+            if (e.getMessage().contains("It does not identify the target aggregate.")) {
+                // Couldn't find identifier in given command, so defaulting to null.
+                // Assuming it will be set in the command handler.
+                return null;
+            }
+            throw e;
+        }
+    }
+
+    private Object handleNewInstanceCreation(CommandMessage<?> command,
+                                             CreationPolicyAggregateFactory<T> factoryMethod,
+                                             MessageHandlingMember<? super T> handler,
+                                             VersionedAggregateIdentifier commandMessageVersionedId) throws Exception {
+        AtomicReference<Object> response = new AtomicReference<>();
+        AtomicReference<Exception> exceptionDuringInit = new AtomicReference<>();
+        Object commandMessageAggregateId = Optional.ofNullable(commandMessageVersionedId)
+                                                   .map(VersionedAggregateIdentifier::getIdentifierValue)
+                                                   .orElse(null);
+
+        Aggregate<T> aggregate = repository.newInstance(
+                () -> factoryMethod.create(commandMessageAggregateId),
+                a -> {
+                    try {
+                        response.set(a.handle(command));
+                    } catch (Exception e) {
+                        exceptionDuringInit.set(e);
+                    }
+                }
+        );
+
+        if (exceptionDuringInit.get() != null) {
+            throw exceptionDuringInit.get();
+        }
+
+        return handlerHasVoidReturnType(handler) ? resolveReturnValue(command, aggregate) : response.get();
+    }
+
+    private static <T> boolean handlerHasVoidReturnType(MessageHandlingMember<? super T> handler) {
+        return handler.unwrap(Method.class)
+                      .map(Method::getReturnType)
+                      .filter(void.class::equals)
+                      .isPresent();
+    }
+
+    private class AggregateCommandHandler implements MessageHandler<CommandMessage<?>> {
+
+        private final MessageHandlingMember<? super T> handler;
+
+        public AggregateCommandHandler(MessageHandlingMember<? super T> handler) {
+            this.handler = handler;
+        }
+
+        @Override
+        public Object handle(CommandMessage<?> command) throws Exception {
+            VersionedAggregateIdentifier iv = commandTargetResolver.resolveTarget(command);
+            return repository.load(iv.getIdentifier(), iv.getVersion()).handle(command);
+        }
+
+        @Override
+        public boolean canHandle(CommandMessage<?> message) {
+            return handler.canHandle(message);
+        }
+    }
+}
+
+1. O commandBus cria um default interceptor que recebe unit of work, outros interceptors e o método final a ser chamado.
+2. O handler para aquele comando é chamado, e ele chama o método handle do handler.
+3. o Handler handle chama o aggregateannotationcommandhandler.handle, que chama o aggregatecommandhandler.handle

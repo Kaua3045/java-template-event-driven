@@ -30,33 +30,34 @@ dependencies {
     implementation(project(":domain"))
 
     implementation('org.springframework.boot:spring-boot-starter-web') {
-        exclude module: 'spring-boot-starter-tomcat'
+//        exclude module: 'spring-boot-starter-tomcat'
     }
-    implementation 'org.springframework.boot:spring-boot-starter-undertow'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+//    implementation 'org.springframework.boot:spring-boot-starter-undertow'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 
     implementation 'ch.qos.logback:logback-core:1.5.15'
     implementation 'ch.qos.logback:logback-classic:1.5.15'
 
     implementation 'com.fasterxml.jackson.module:jackson-module-blackbird'
 
-    implementation 'org.flywaydb:flyway-core'
+//    implementation 'org.flywaydb:flyway-core'
 //    implementation 'org.postgresql:postgresql' change to match your database driver
 
     implementation 'org.owasp.encoder:encoder:1.2.3'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-    testRuntimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.h2database:h2'
 
     testImplementation(project(path: ':domain', configuration: 'testClasses'))
 }
 
-flyway { // Flyway configuration change this to match your database
-    url = 'jdbc:postgresql://' + System.getenv('DATABASE_POSTGRESQL_URL') + '/template' ?: 'jdbc:postgresql://localhost:5432/template'
-    user = System.getenv('DATABASE_POSTGRESQL_USERNAME') ?: 'postgres'
-    password = System.getenv('DATABASE_POSTGRESQL_PASSWORD') ?: '123456'
-}
+//flyway { // Flyway configuration change this to match your database
+//    url = 'jdbc:postgresql://' + System.getenv('DATABASE_POSTGRESQL_URL') + '/template' ?: 'jdbc:postgresql://localhost:5432/template'
+//    user = System.getenv('DATABASE_POSTGRESQL_USERNAME') ?: 'postgres'
+//    password = System.getenv('DATABASE_POSTGRESQL_PASSWORD') ?: '123456'
+//}
 
 jacocoTestReport {
     afterEvaluate {
