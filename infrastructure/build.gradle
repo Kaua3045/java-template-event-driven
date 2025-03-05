@@ -65,6 +65,7 @@ jacocoTestReport {
                 files(classDirectories.files.collect {
                     fileTree(dir: it, exclude: [
                             'om/kaua/template/event/infrastructure/configurations/*',
+                            'om/kaua/template/event/infrastructure/es/*',
                             'om/kaua/template/event/infrastructure/Main.class'
                     ])
                 })
@@ -87,6 +88,7 @@ testCodeCoverageReport {
                 files(classDirectories.files.collect {
                     fileTree(dir: it, exclude: [
                             'com/kaua/event/driven/infrastructure/configurations/*',
+                            'com/kaua/event/driven/infrastructure/es/*',
                             'com/kaua/event/driven/infrastructure/Main.class'
                     ])
                 })
@@ -100,6 +102,7 @@ jacocoTestCoverageVerification {
                 files(classDirectories.files.collect {
                     fileTree(dir: it, exclude: [
                             'com/kaua/event/driven/infrastructure/configurations/*',
+                            'com/kaua/event/driven/infrastructure/es/*',
                             'com/kaua/event/driven/infrastructure/Main.class'
                     ])
                 })
