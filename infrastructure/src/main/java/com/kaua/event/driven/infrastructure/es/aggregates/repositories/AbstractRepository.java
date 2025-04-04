@@ -1,6 +1,8 @@
 package com.kaua.event.driven.infrastructure.es.aggregates.repositories;
 
+import com.kaua.event.driven.domain.exceptions.AggregateDeletionException;
 import com.kaua.event.driven.domain.exceptions.ConflictAggregateVersionException;
+import com.kaua.event.driven.domain.exceptions.NotFoundException;
 import com.kaua.event.driven.infrastructure.es.aggregates.Aggregate;
 import com.kaua.event.driven.infrastructure.es.aggregates.AggregateRepository;
 import com.kaua.event.driven.infrastructure.es.aggregates.model.AggregateModel;
@@ -36,7 +38,7 @@ public abstract class AbstractRepository<T, A extends Aggregate<T>> implements A
                         return doLoad(s);
                     } catch (Exception e) {
                         log.error("Error loading aggregate", e);
-                        throw new RuntimeException(e);
+                        throw e;
                     }
                 }
         );
@@ -59,7 +61,7 @@ public abstract class AbstractRepository<T, A extends Aggregate<T>> implements A
                         return doLoad(s, expectedVersion);
                     } catch (Exception e) {
                         log.error("Error loading aggregate", e);
-                        throw new RuntimeException(e);
+                        throw e;
                     }
                 }
         );
@@ -116,6 +118,10 @@ public abstract class AbstractRepository<T, A extends Aggregate<T>> implements A
                 s -> {
                     try {
                         return doLoadOrCreate(aggregateIdentifier, factoryMethod);
+                    } catch (AggregateDeletionException e) {
+                        throw new AggregateDeletionException(aggregateIdentifier);
+                    } catch (NotFoundException e) {
+                        throw NotFoundException.withIdentifier(aggregateIdentifier);
                     } catch (Exception e) {
                         log.error("Error loading or creating aggregate", e);
                         throw new RuntimeException(e);
@@ -125,6 +131,7 @@ public abstract class AbstractRepository<T, A extends Aggregate<T>> implements A
         uow.onRollback(u -> aggregates.remove(aggregateIdentifier));
         prepareForCommit(aggregate);
 
+        // TODO identifier and version returning null
         log.info("Aggregate loaded or created with identifier: {} and version: {}", aggregate.identifierAsString(), aggregate.version());
 
         return aggregate;

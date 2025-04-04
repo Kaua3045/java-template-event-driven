@@ -15,5 +15,8 @@ class ConflictAggregateVersionExceptionTest extends UnitTest {
         ConflictAggregateVersionException exception = new ConflictAggregateVersionException(aggregateId, expectedVersion, actualVersion);
 
         Assertions.assertEquals("Conflict detected for aggregate " + aggregateId + ". Expected version " + expectedVersion + " but was " + actualVersion, exception.getMessage());
+        Assertions.assertEquals(aggregateId, exception.getAggregateId());
+        Assertions.assertEquals(expectedVersion, exception.getExpectedVersion());
+        Assertions.assertEquals(actualVersion, exception.getActualVersion());
     }
 }

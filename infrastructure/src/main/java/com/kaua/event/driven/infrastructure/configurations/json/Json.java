@@ -5,11 +5,14 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.databind.util.StdDateFormat;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.blackbird.BlackbirdModule;
+import com.kaua.event.driven.infrastructure.es.eventprocessing.token.kafka.TopicPartitionKeyDeserializer;
+import org.apache.kafka.common.TopicPartition;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.util.concurrent.Callable;
@@ -60,7 +63,7 @@ public enum Json {
                     DeserializationFeature.FAIL_ON_NULL_CREATOR_PROPERTIES,
                     SerializationFeature.WRITE_DATES_AS_TIMESTAMPS
             )
-            .modules(new JavaTimeModule(), new Jdk8Module(), new BlackbirdModule())
+            .modules(new JavaTimeModule(), new Jdk8Module(), new BlackbirdModule(), new SimpleModule().addKeyDeserializer(TopicPartition.class, new TopicPartitionKeyDeserializer()))
             .propertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
             .build();
 

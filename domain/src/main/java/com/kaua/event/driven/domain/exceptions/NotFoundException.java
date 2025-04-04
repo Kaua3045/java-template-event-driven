@@ -23,7 +23,7 @@ public class NotFoundException extends NoStackTraceException {
         return new NotFoundException(
                 identifier,
                 0,
-                "Aggregate with identifier %s not found".formatted(identifier)
+                "Aggregate with identifier %s was not found".formatted(identifier)
         );
     }
 

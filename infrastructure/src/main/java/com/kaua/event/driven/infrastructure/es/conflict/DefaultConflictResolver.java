@@ -2,7 +2,7 @@ package com.kaua.event.driven.infrastructure.es.conflict;
 
 import com.kaua.event.driven.domain.events.DomainEvent;
 import com.kaua.event.driven.domain.exceptions.ConflictAggregateVersionException;
-import com.kaua.event.driven.infrastructure.es.jpa.EventStore;
+import com.kaua.event.driven.infrastructure.es.eventstore.EventStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

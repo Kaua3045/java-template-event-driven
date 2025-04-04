@@ -22,7 +22,11 @@ spring:
 #    username: postgres
 #    password: 123456
   jpa:
+#    database-platform: com.kaua.event.driven.infrastructure.configurations.CustomH2Dialect
     show-sql: true
+    properties:
+      hibernate:
+        dialect: com.kaua.event.driven.infrastructure.configurations.CustomH2Dialect
     hibernate:
       ddl-auto: update
 #  flyway:

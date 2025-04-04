@@ -1,3 +1,10 @@
+es:
+  eventstore:
+    outboxEnabled: true
+  outbox:
+    publish-rate-minutes: 1
+    publish-initial-delay-minutes: 1
+
 logging:
   level:
     ROOT: WARN

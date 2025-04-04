@@ -16,12 +16,12 @@ public class StubAggregateLifecycle extends AggregateLifecycle {
     private static final String AGGREGATE_TYPE = "stubAggregate";
 
     private Runnable registration;
-    private List<DomainEvent> appliedMessages = new CopyOnWriteArrayList<>();
+    private final List<DomainEvent> appliedMessages = new CopyOnWriteArrayList<>();
     private boolean deleted;
 
     public void activate() {
         super.startScope();
-        this.registration = () -> super.endScope();
+        this.registration = super::endScope;
     }
 
     public void close() {

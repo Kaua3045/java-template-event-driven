@@ -42,4 +42,9 @@ public class InMemoryCache implements Cache {
         log.debug("Checking if cache contains key: {}", key);
         return cache.containsKey(key);
     }
+
+    public void clear() {
+        log.debug("Clearing cache");
+        cache.clear();
+    }
 }

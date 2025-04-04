@@ -6,7 +6,7 @@ import com.kaua.event.driven.infrastructure.es.aggregates.Aggregate;
 import com.kaua.event.driven.infrastructure.es.aggregates.AggregateCacheEntry;
 import com.kaua.event.driven.infrastructure.es.aggregates.EventSourcedAggregate;
 import com.kaua.event.driven.infrastructure.es.aggregates.model.AggregateModel;
-import com.kaua.event.driven.infrastructure.es.jpa.EventStore;
+import com.kaua.event.driven.infrastructure.es.eventstore.EventStore;
 import com.kaua.event.driven.infrastructure.es.lock.LockFactory;
 import com.kaua.event.driven.infrastructure.uow.CurrentUnitOfWork;
 

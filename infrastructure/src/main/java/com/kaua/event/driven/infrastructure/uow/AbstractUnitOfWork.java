@@ -17,9 +17,7 @@ public abstract class AbstractUnitOfWork<T> implements UnitOfWork<T> {
 
     @Override
     public void start() {
-        if (logger.isDebugEnabled()) {
-            logger.debug("Starting Unit Of Work");
-        }
+        logger.debug("Starting Unit Of Work");
         Assert.state(Phase.NOT_STARTED.equals(phase()), () -> "UnitOfWork is already started");
         rolledBack = false;
         onRollback(u -> rolledBack = true);
@@ -34,9 +32,7 @@ public abstract class AbstractUnitOfWork<T> implements UnitOfWork<T> {
 
     @Override
     public void commit() {
-        if (logger.isDebugEnabled()) {
-            logger.debug("Committing Unit Of Work");
-        }
+        logger.debug("Committing Unit Of Work");
         Assert.state(phase() == Phase.STARTED, () -> String.format("The UnitOfWork is in an incompatible phase: %s", phase()));
         Assert.state(isCurrent(), () -> "The UnitOfWork is not the current Unit of Work");
         try {
@@ -90,9 +86,7 @@ public abstract class AbstractUnitOfWork<T> implements UnitOfWork<T> {
 
     @Override
     public void rollback(Throwable cause) {
-        if (logger.isDebugEnabled()) {
-            logger.debug("Rolling back Unit Of Work.", cause);
-        }
+        logger.debug("Rolling back Unit Of Work.", cause);
         Assert.state(isActive() && phase().isBefore(Phase.ROLLBACK),
                 () -> String.format("The UnitOfWork is in an incompatible phase: %s", phase()));
         Assert.state(isCurrent(), () -> "The UnitOfWork is not the current Unit of Work");
@@ -167,7 +161,7 @@ public abstract class AbstractUnitOfWork<T> implements UnitOfWork<T> {
 
     protected abstract void addHandler(Phase phase, Consumer<UnitOfWork<T>> handler);
 
-//    protected abstract void setExecutionResult(ExecutionResult executionResult);
+    protected abstract void setExecutionResult(ResultMessage<?> executionResult);
 
     protected abstract void setRollbackCause(Throwable cause);
 }

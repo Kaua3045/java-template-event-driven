@@ -28,6 +28,10 @@ public class DefaultAggregateModel<T> implements AggregateModel<T> {
     private final Class<T> entityClass;
 
     public DefaultAggregateModel(Class<T> aggregateRoot) {
+        if (aggregateRoot == null) {
+            throw new InternalErrorException("Aggregate root class cannot be null");
+        }
+
         this.entityClass = aggregateRoot;
 
         this.aggregateIdentifier = findFieldByAnnotation(
@@ -108,7 +112,10 @@ public class DefaultAggregateModel<T> implements AggregateModel<T> {
                             MethodType.methodType(method.getReturnType(), method.getParameterTypes())
                     );
                     handlers.put(method.getParameterTypes()[0],
-                            new AnnotatedMessageHandling<>(methodHandle));
+                            new AnnotatedMessageHandling<>(
+                                    methodHandle,
+                                    method.getParameterTypes()[0]
+                            ));
                 } catch (NoSuchMethodException | IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
@@ -131,7 +138,10 @@ public class DefaultAggregateModel<T> implements AggregateModel<T> {
                             MethodType.methodType(method.getReturnType(), method.getParameterTypes())
                     );
                     List<MessageHandlingMember<? super T>> interceptors = new ArrayList<>();
-                    interceptors.add(new AnnotatedMessageHandling<>(methodHandle));
+                    interceptors.add(new AnnotatedMessageHandling<>(
+                            methodHandle,
+                            method.getParameterTypes()[0]
+                    ));
 
                     handlers.put(method.getParameterTypes()[0], interceptors);
                 } catch (NoSuchMethodException | IllegalAccessException e) {

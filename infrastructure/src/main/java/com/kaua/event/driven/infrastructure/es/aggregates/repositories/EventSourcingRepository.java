@@ -8,7 +8,7 @@ import com.kaua.event.driven.infrastructure.es.aggregates.Aggregate;
 import com.kaua.event.driven.infrastructure.es.aggregates.EventSourcedAggregate;
 import com.kaua.event.driven.infrastructure.es.aggregates.model.AggregateModel;
 import com.kaua.event.driven.infrastructure.es.conflict.DefaultConflictResolver;
-import com.kaua.event.driven.infrastructure.es.jpa.EventStore;
+import com.kaua.event.driven.infrastructure.es.eventstore.EventStore;
 import com.kaua.event.driven.infrastructure.es.lock.LockFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

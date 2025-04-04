@@ -49,7 +49,7 @@ public interface UnitOfWork<T> {
 
     T getMessage();
 
-//    UnitOfWork<T> transformMessage(Function<T, ? extends Message<?>> transformOperator);
+    ResultMessage<T> getResultMessage();
 
     Map<String, Object> resources();
 

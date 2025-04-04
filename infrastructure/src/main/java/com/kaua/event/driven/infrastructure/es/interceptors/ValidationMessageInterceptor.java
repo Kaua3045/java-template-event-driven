@@ -29,8 +29,6 @@ public class ValidationMessageInterceptor<T>
     @Override
     public BiFunction<Integer, T, T> handle(@Nonnull List<? extends T> messages) {
         return (index, message) -> {
-            // TODO need basic validations, and in future use ? extends Input
-
             if (message instanceof Command command) {
                 log.debug("Validating command: {}", command);
                 assertArgumentNotEmpty(command.commandId(), "commandId", "should not be empty");

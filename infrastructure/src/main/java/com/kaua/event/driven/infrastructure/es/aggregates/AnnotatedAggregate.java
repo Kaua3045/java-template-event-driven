@@ -6,21 +6,15 @@ import com.kaua.event.driven.domain.exceptions.InternalErrorException;
 import com.kaua.event.driven.domain.exceptions.NoHandlerForCommandException;
 import com.kaua.event.driven.infrastructure.es.aggregates.model.AggregateModel;
 import com.kaua.event.driven.infrastructure.es.eventbus.EventBus;
-import com.kaua.event.driven.infrastructure.es.interceptors.AnnotatedCommandHandlerInterceptor;
-import com.kaua.event.driven.infrastructure.es.interceptors.DefaultInterceptorChain;
 import com.kaua.event.driven.infrastructure.es.message.MessageHandlingMember;
 import com.kaua.event.driven.infrastructure.es.scope.ScopeDescriptor;
-import com.kaua.event.driven.infrastructure.uow.CurrentUnitOfWork;
-import com.kaua.event.driven.infrastructure.uow.UnitOfWork;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public class AnnotatedAggregate<T> extends AggregateLifecycle implements Aggregate<T>, ApplyMore {
 
@@ -104,19 +98,6 @@ public class AnnotatedAggregate<T> extends AggregateLifecycle implements Aggrega
     }
 
     private Object handle(Command message) {
-        // TODO verificar esse métddo
-
-        List<AnnotatedCommandHandlerInterceptor<? super T>> interceptors =
-                model.commandHandlersInterceptors()
-                        .values()
-                        .stream()
-                        .map(list -> list.stream()
-                                .filter(interceptor -> interceptor.canHandle(message))
-                                .map(interceptor -> new AnnotatedCommandHandlerInterceptor<>(interceptor, aggregateRoot))
-                                .toList())
-                        .flatMap(List::stream)
-                        .collect(Collectors.toList());
-
         MessageHandlingMember<? super T> potentialHandler = model.commandHandlers()
                 .values()
                 .stream()
@@ -124,21 +105,7 @@ public class AnnotatedAggregate<T> extends AggregateLifecycle implements Aggrega
                 .findFirst()
                 .orElseThrow(() -> new NoHandlerForCommandException(message));
 
-        if (interceptors.isEmpty()) {
-            return potentialHandler.handle(message, aggregateRoot);
-        }
-
-        try {
-            return new DefaultInterceptorChain<>(
-                    m -> potentialHandler,
-                    interceptors,
-                    (UnitOfWork<? extends Command>) CurrentUnitOfWork.get()
-            ).process();
-        } catch (Exception e) {
-            log.error("Error handling command", e);
-            throw new RuntimeException(e);
-        }
-
+        return potentialHandler.handle(message, aggregateRoot);
     }
 
     private Object handle(DomainEvent event) {

@@ -3,9 +3,9 @@ package com.kaua.event.driven.infrastructure.uow;
 public class ResultMessage<T> {
 
     private final T result;
-    private final Exception exception;
+    private final Throwable exception;
 
-    private ResultMessage(T result, Exception exception) {
+    private ResultMessage(T result, Throwable exception) {
         this.result = result;
         this.exception = exception;
     }
@@ -18,6 +18,10 @@ public class ResultMessage<T> {
         return new ResultMessage<>(null, exception);
     }
 
+    public static <T> ResultMessage<T> failure(Throwable exception) {
+        return new ResultMessage<>(null, exception);
+    }
+
     public T getResult() {
         return result;
     }
@@ -26,7 +30,7 @@ public class ResultMessage<T> {
         return exception != null;
     }
 
-    public Exception getExceptionResult() {
+    public Throwable getExceptionResult() {
         return exception;
     }
 }

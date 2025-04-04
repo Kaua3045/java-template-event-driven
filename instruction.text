@@ -1,3 +1,182 @@
+17:52:37.279-0300 [main] [] [] INFO  c.k.event.driven.infrastructure.Main - Started Main in 3.04 seconds (process running for 3.31)
+17:52:37.282-0300 [event-processor] [] [] DEBUG c.k.e.d.i.e.e.token.TokenStoreImpl - Retrieving token for processor order-aggregate-processor
+Hibernate: select te1_0.id,te1_0.processor_name,te1_0.token,te1_0.token_class from token te1_0 where te1_0.processor_name=?
+null
+17:52:37.379-0300 [event-processor] [] [] DEBUG c.k.e.d.i.e.e.m.KafkaMessageSource - Reading events from Kafka for tracking token null
+[events-0]
+17:52:37.394-0300 [event-processor] [] [] INFO  c.k.e.d.i.e.e.m.KafkaMessageSource - Seeking topic-partition [events-0] with offset [0]
+17:52:37.408-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] INFO  o.s.k.l.KafkaMessageListenerContainer - replay-events-response-order-aggregate-processor: partitions assigned: [replay-events-response-order-aggregate-processor-0]
+17:52:37.408-0300 [replay-events-request-01-0-C-1] [] [] INFO  o.s.k.l.KafkaMessageListenerContainer - replay-events-request: partitions assigned: [replay-events-request-0]
+17:52:39.669-0300 [tomcat-handler-0] [] [] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17:52:39.670-0300 [tomcat-handler-0] [] [] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+17:52:39.686-0300 [tomcat-handler-0] [] [] INFO  c.k.e.d.i.e.c.CommandGatewayImpl - Sending command: CreateOrderCommand[commandId=8a07f3fa-d2f6-4879-9414-7caba9b3ace9, commandType=CreateOrderCommand, occurredOn=2025-03-11T20:52:39.686243Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, traceId=b86d2ca5-0cd3-454b-97d4-011e3146d3b3, description=123]
+17:52:39.689-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.c.impl.SimpleCommandBus - Dispatching command with callback
+17:52:39.689-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.a.AggregateCommandHandlerAnnotated - Checking if can handle command CreateOrderCommand[commandId=8a07f3fa-d2f6-4879-9414-7caba9b3ace9, commandType=CreateOrderCommand, occurredOn=2025-03-11T20:52:39.686243Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, traceId=b86d2ca5-0cd3-454b-97d4-011e3146d3b3, description=123]
+17:52:39.690-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.m.AnnotatedMessageHandling - Checking if can handle message CreateOrderCommand[commandId=8a07f3fa-d2f6-4879-9414-7caba9b3ace9, commandType=CreateOrderCommand, occurredOn=2025-03-11T20:52:39.686243Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, traceId=b86d2ca5-0cd3-454b-97d4-011e3146d3b3, description=123]
+17:52:39.690-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.m.AnnotatedMessageHandling - Checking if can handle message CreateOrderCommand[commandId=8a07f3fa-d2f6-4879-9414-7caba9b3ace9, commandType=CreateOrderCommand, occurredOn=2025-03-11T20:52:39.686243Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, traceId=b86d2ca5-0cd3-454b-97d4-011e3146d3b3, description=123]
+17:52:39.690-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.i.ValidationMessageInterceptor - Validating command: CreateOrderCommand[commandId=8a07f3fa-d2f6-4879-9414-7caba9b3ace9, commandType=CreateOrderCommand, occurredOn=2025-03-11T20:52:39.686243Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, traceId=b86d2ca5-0cd3-454b-97d4-011e3146d3b3, description=123]
+17:52:39.690-0300 [tomcat-handler-0] [] [] INFO  c.k.e.d.i.e.i.ValidationMessageInterceptor - Message validated: CreateOrderCommand[commandId=8a07f3fa-d2f6-4879-9414-7caba9b3ace9, commandType=CreateOrderCommand, occurredOn=2025-03-11T20:52:39.686243Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, traceId=b86d2ca5-0cd3-454b-97d4-011e3146d3b3, description=123]
+17:52:39.691-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.AbstractUnitOfWork - Starting Unit Of Work
+17:52:39.691-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Adding handler for phase ROLLBACK
+17:52:39.691-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Notifying handlers for phase STARTED
+17:52:39.694-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Adding handler for phase COMMIT
+17:52:39.694-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Adding handler for phase ROLLBACK
+17:52:39.695-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.a.AggregateCommandHandlerAnnotated - Handling command CreateOrderCommand[commandId=8a07f3fa-d2f6-4879-9414-7caba9b3ace9, commandType=CreateOrderCommand, occurredOn=2025-03-11T20:52:39.686243Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, traceId=b86d2ca5-0cd3-454b-97d4-011e3146d3b3, description=123]
+17:52:39.695-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.m.AnnotatedMessageHandling - Checking if can handle message CreateOrderCommand[commandId=8a07f3fa-d2f6-4879-9414-7caba9b3ace9, commandType=CreateOrderCommand, occurredOn=2025-03-11T20:52:39.686243Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, traceId=b86d2ca5-0cd3-454b-97d4-011e3146d3b3, description=123]
+17:52:39.695-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.m.AnnotatedMessageHandling - Checking if can handle message CreateOrderCommand[commandId=8a07f3fa-d2f6-4879-9414-7caba9b3ace9, commandType=CreateOrderCommand, occurredOn=2025-03-11T20:52:39.686243Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, traceId=b86d2ca5-0cd3-454b-97d4-011e3146d3b3, description=123]
+17:52:39.695-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.a.r.AbstractRepository - Loading or creating aggregate: e3bb6e7e-12e9-42c1-8812-0a8d9314edec
+17:52:39.696-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.a.r.LockingRepository - Trying to load aggregate e3bb6e7e-12e9-42c1-8812-0a8d9314edec instance. Lock will be released after loading
+17:52:39.696-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.cache.InMemoryCache - Getting value from cache for key: e3bb6e7e-12e9-42c1-8812-0a8d9314edec
+Hibernate: select ee1_0.event_id,ee1_0.aggregate_id,ee1_0.aggregate_version,ee1_0.data,ee1_0.occurred_on,ee1_0.published,ee1_0.type from events ee1_0 where ee1_0.aggregate_id=?
+17:52:39.699-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.a.r.LockingRepository - Aggregate e3bb6e7e-12e9-42c1-8812-0a8d9314edec not found. Creating new instance. Lock will be released after creation
+17:52:39.699-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.a.r.EventSourcingRepository - Event sourced aggregate created
+17:52:39.699-0300 [tomcat-handler-0] [] [] INFO  c.k.e.d.i.e.a.r.LockingRepository - Created new aggregate e3bb6e7e-12e9-42c1-8812-0a8d9314edec instance. Lock released after creation
+17:52:39.700-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Adding handler for phase CLEANUP
+17:52:39.700-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Adding handler for phase ROLLBACK
+17:52:39.700-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Adding handler for phase PREPARE_COMMIT
+17:52:39.700-0300 [tomcat-handler-0] [] [] INFO  c.k.e.d.i.e.a.r.AbstractRepository - Aggregate loaded or created with identifier: null and version: null
+17:52:39.700-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.a.AnnotatedAggregate - Handling message: CreateOrderCommand[commandId=8a07f3fa-d2f6-4879-9414-7caba9b3ace9, commandType=CreateOrderCommand, occurredOn=2025-03-11T20:52:39.686243Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, traceId=b86d2ca5-0cd3-454b-97d4-011e3146d3b3, description=123]
+17:52:39.701-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.es.scope.Scope - Starting scope: com.kaua.event.driven.infrastructure.es.aggregates.EventSourcedAggregate@8e0259f
+17:52:39.701-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.m.AnnotatedMessageHandling - Checking if can handle message CreateOrderCommand[commandId=8a07f3fa-d2f6-4879-9414-7caba9b3ace9, commandType=CreateOrderCommand, occurredOn=2025-03-11T20:52:39.686243Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, traceId=b86d2ca5-0cd3-454b-97d4-011e3146d3b3, description=123]
+17:52:39.701-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.m.AnnotatedMessageHandling - Checking if can handle message CreateOrderCommand[commandId=8a07f3fa-d2f6-4879-9414-7caba9b3ace9, commandType=CreateOrderCommand, occurredOn=2025-03-11T20:52:39.686243Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, traceId=b86d2ca5-0cd3-454b-97d4-011e3146d3b3, description=123]
+17:52:39.701-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.m.AnnotatedMessageHandling - Handling message CreateOrderCommand[commandId=8a07f3fa-d2f6-4879-9414-7caba9b3ace9, commandType=CreateOrderCommand, occurredOn=2025-03-11T20:52:39.686243Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, traceId=b86d2ca5-0cd3-454b-97d4-011e3146d3b3, description=123] with target com.kaua.event.driven.infrastructure.es.tests.OrderAggregate@6bc7069e
+17:52:39.701-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.es.tests.OrderAggregate - Handling CreateOrderCommand: CreateOrderCommand[commandId=8a07f3fa-d2f6-4879-9414-7caba9b3ace9, commandType=CreateOrderCommand, occurredOn=2025-03-11T20:52:39.686243Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, traceId=b86d2ca5-0cd3-454b-97d4-011e3146d3b3, description=123]
+17:52:39.702-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.m.AnnotatedMessageHandling - Checking if can handle message OrderCreatedEvent[eventId=553206b3-9ad8-4d68-bd06-f765f9c74945, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-03-11T20:52:39.701939930Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, source=OrderService, traceId=traceId, description=123]
+17:52:39.705-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.m.AnnotatedMessageHandling - Handling message OrderCreatedEvent[eventId=553206b3-9ad8-4d68-bd06-f765f9c74945, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-03-11T20:52:39.701939930Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, source=OrderService, traceId=traceId, description=123] with target com.kaua.event.driven.infrastructure.es.tests.OrderAggregate@6bc7069e
+17:52:39.705-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.es.tests.OrderAggregate - Handling OrderCreatedEvent: OrderCreatedEvent[eventId=553206b3-9ad8-4d68-bd06-f765f9c74945, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-03-11T20:52:39.701939930Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, source=OrderService, traceId=traceId, description=123]
+17:52:39.706-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.e.AbstractEventBus - Publishing event OrderCreatedEvent[eventId=553206b3-9ad8-4d68-bd06-f765f9c74945, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-03-11T20:52:39.701939930Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, source=OrderService, traceId=traceId, description=123] for other handlers
+17:52:39.706-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Adding handler for phase PREPARE_COMMIT
+17:52:39.706-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Adding handler for phase COMMIT
+17:52:39.706-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Adding handler for phase AFTER_COMMIT
+17:52:39.706-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Adding handler for phase CLEANUP
+17:52:39.706-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.es.scope.Scope - Clearing out ThreadLocal current Scope, as no Scopes are present
+17:52:39.706-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.AbstractUnitOfWork - Committing Unit Of Work
+17:52:39.707-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Notifying handlers for phase PREPARE_COMMIT
+17:52:39.707-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.e.a.r.AbstractRepository - Saving aggregate: e3bb6e7e-12e9-42c1-8812-0a8d9314edec
+17:52:39.707-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Adding handler for phase ROLLBACK
+17:52:39.707-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.cache.InMemoryCache - Putting value in cache for key: e3bb6e7e-12e9-42c1-8812-0a8d9314edec, value: com.kaua.event.driven.infrastructure.es.aggregates.AggregateCacheEntry@6260eb5a
+17:52:39.707-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.es.jpa.EventStoreImpl - Preparing to save events: [OrderCreatedEvent[eventId=553206b3-9ad8-4d68-bd06-f765f9c74945, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-03-11T20:52:39.701939930Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, source=OrderService, traceId=traceId, description=123]]
+Hibernate: select ee1_0.event_id,ee1_0.aggregate_id,ee1_0.aggregate_version,ee1_0.data,ee1_0.occurred_on,ee1_0.published,ee1_0.type from events ee1_0 where ee1_0.event_id=?
+17:52:39.773-0300 [event-processor] [] [] DEBUG c.k.e.d.i.e.e.m.KafkaMessageSource - Reading event from record: ConsumerRecord(topic = events, partition = 0, leaderEpoch = 0, offset = 0, CreateTime = 1741726359758, serialized key size = 36, serialized value size = 325, headers = RecordHeaders(headers = [RecordHeader(key = event_type, value = [99, 111, 109, 46, 107, 97, 117, 97, 46, 101, 118, 101, 110, 116, 46, 100, 114, 105, 118, 101, 110, 46, 105, 110, 102, 114, 97, 115, 116, 114, 117, 99, 116, 117, 114, 101, 46, 101, 115, 46, 116, 101, 115, 116, 115, 46, 118, 97, 108, 117, 101, 115, 46, 79, 114, 100, 101, 114, 67, 114, 101, 97, 116, 101, 100, 69, 118, 101, 110, 116])], isReadOnly = false), key = e3bb6e7e-12e9-42c1-8812-0a8d9314edec, value = {"event_id":"553206b3-9ad8-4d68-bd06-f765f9c74945","event_type":"com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent","occurred_on":"2025-03-11T20:52:39.701939930Z","aggregate_id":"e3bb6e7e-12e9-42c1-8812-0a8d9314edec","aggregate_version":0,"source":"OrderService","trace_id":"traceId","description":"123"})
+17:52:39.774-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Notifying handlers for phase COMMIT
+Hibernate: insert into events (aggregate_id,aggregate_version,data,occurred_on,published,type,event_id) values (?,?,?,?,?,?,?)
+17:52:39.788-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Notifying handlers for phase AFTER_COMMIT
+17:52:39.788-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Notifying handlers for phase CLEANUP
+17:52:39.788-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.DefaultUnitOfWork - Notifying handlers for phase CLOSED
+17:52:39.788-0300 [tomcat-handler-0] [] [] DEBUG c.k.e.d.i.uow.CurrentUnitOfWork - Removed the UnitOfWork from the current thread
+17:52:39.788-0300 [tomcat-handler-0] [] [] INFO  c.k.e.d.i.e.c.c.LoggingCallback - Command executed successfully: CreateOrderCommand[commandId=8a07f3fa-d2f6-4879-9414-7caba9b3ace9, commandType=CreateOrderCommand, occurredOn=2025-03-11T20:52:39.686243Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, traceId=b86d2ca5-0cd3-454b-97d4-011e3146d3b3, description=123]
+last token: com.kaua.event.driven.infrastructure.es.eventprocessing.token.kafka.KafkaTrackingToken@61e4798
+17:52:39.795-0300 [event-processor] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Adding handler com.kaua.event.driven.infrastructure.uow.UnitOfWork$$Lambda/0x00007fe044b2a5e8 for phase COMMIT
+17:52:39.796-0300 [event-processor] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Adding handler com.kaua.event.driven.infrastructure.uow.UnitOfWork$$Lambda/0x00007fe044b2a810 for phase ROLLBACK
+17:52:39.796-0300 [event-processor] [] [] DEBUG c.k.e.d.i.uow.AbstractUnitOfWork - Starting Unit Of Work
+17:52:39.796-0300 [event-processor] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Adding handler com.kaua.event.driven.infrastructure.uow.AbstractUnitOfWork$$Lambda/0x00007fe044b26a10 for phase ROLLBACK
+17:52:39.796-0300 [event-processor] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Notifying handlers for phase STARTED
+Processing event: OrderCreatedEvent[eventId=553206b3-9ad8-4d68-bd06-f765f9c74945, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-03-11T20:52:39.701939930Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, source=OrderService, traceId=traceId, description=123]
+17:52:39.797-0300 [event-processor] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Adding handler com.kaua.event.driven.infrastructure.es.eventprocessing.tracking.TrackingProcessor$$Lambda/0x00007fe044b91de8 for phase PREPARE_COMMIT
+17:52:39.797-0300 [event-processor] [] [] DEBUG c.k.e.d.i.e.e.AbstractEventProcessor - Processing event: OrderCreatedEvent[eventId=553206b3-9ad8-4d68-bd06-f765f9c74945, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-03-11T20:52:39.701939930Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, source=OrderService, traceId=traceId, description=123]
+SimpleEventHandlerInvoker.handle
+17:52:39.797-0300 [event-processor] [] [] DEBUG c.k.e.d.i.e.m.AnnotatedMessageHandling - Handling message OrderCreatedEvent[eventId=553206b3-9ad8-4d68-bd06-f765f9c74945, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-03-11T20:52:39.701939930Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, source=OrderService, traceId=traceId, description=123] with target com.kaua.event.driven.infrastructure.es.tests.OrderEventHandler@18711946
+Order created: OrderCreatedEvent[eventId=553206b3-9ad8-4d68-bd06-f765f9c74945, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-03-11T20:52:39.701939930Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, source=OrderService, traceId=traceId, description=123]
+after invoke
+17:52:39.798-0300 [event-processor] [] [] DEBUG c.k.e.d.i.uow.AbstractUnitOfWork - Committing Unit Of Work
+17:52:39.798-0300 [event-processor] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Notifying handlers for phase PREPARE_COMMIT
+17:52:39.798-0300 [event-processor] [] [] DEBUG c.k.e.d.i.e.e.token.TokenStoreImpl - Storing token com.kaua.event.driven.infrastructure.es.eventprocessing.token.kafka.KafkaTrackingToken@61e4798
+Hibernate: insert into token (processor_name,token,token_class) values (?,?,?)
+17:52:39.815-0300 [event-processor] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Notifying handlers for phase COMMIT
+17:52:39.815-0300 [event-processor] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Notifying handlers for phase AFTER_COMMIT
+17:52:39.815-0300 [event-processor] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Notifying handlers for phase CLEANUP
+17:52:39.815-0300 [event-processor] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Notifying handlers for phase CLOSED
+17:52:39.815-0300 [event-processor] [] [] DEBUG c.k.e.d.i.uow.CurrentUnitOfWork - Removed the UnitOfWork from the current thread
+Result message: com.kaua.event.driven.infrastructure.uow.ResultMessage@40262a53
+result message result: null
+17:52:39.815-0300 [event-processor] [] [] DEBUG c.k.e.d.i.e.e.t.TrackingProcessor - Processed 1 events
+17:52:39.815-0300 [event-processor] [] [] DEBUG c.k.e.d.i.e.e.m.KafkaMessageSource - Reading events from Kafka for tracking token com.kaua.event.driven.infrastructure.es.eventprocessing.token.kafka.KafkaTrackingToken@61e4798
+[events-0]
+Token partition positions: {events-0=0}
+17:52:40.283-0300 [event-processor] [] [] INFO  c.k.e.d.i.e.e.m.KafkaMessageSource - Seeking topic-partition [events-0] with offset [1]
+17:52:42.681-0300 [tomcat-handler-1] [] [] DEBUG c.k.e.d.i.e.e.t.TrackingProcessor - Starting reset of the tracking processor [order-aggregate-processor]
+17:52:42.681-0300 [tomcat-handler-1] [] [] DEBUG c.k.e.d.i.e.e.t.TrackingProcessor - Stopping TrackingProcessor [order-aggregate-processor]
+17:52:42.693-0300 [tomcat-handler-1] [] [] DEBUG c.k.e.d.i.e.m.AnnotatedMessageHandling - Handling message null with target com.kaua.event.driven.infrastructure.es.tests.OrderEventHandler@18711946
+Resetting OrderEventHandler
+17:52:42.693-0300 [tomcat-handler-1] [] [] DEBUG c.k.e.d.i.e.e.token.TokenStoreImpl - Removing token for processor order-aggregate-processor
+Hibernate: select te1_0.id,te1_0.processor_name,te1_0.token,te1_0.token_class from token te1_0 where te1_0.processor_name=?
+17:52:42.701-0300 [tomcat-handler-1] [] [] DEBUG c.k.e.d.i.e.e.r.k.KafkaReplayService - Replaying events from token com.kaua.event.driven.infrastructure.es.eventprocessing.token.kafka.KafkaTrackingToken@6011f4e4
+17:52:42.707-0300 [tomcat-handler-1] [] [] INFO  c.k.e.d.i.e.e.r.k.KafkaReplayService - Replay events request sent to topic [replay-events-request] with tracking token com.kaua.event.driven.infrastructure.es.eventprocessing.token.kafka.KafkaTrackingToken@6011f4e4
+17:52:42.707-0300 [tomcat-handler-1] [] [] DEBUG c.k.e.d.i.e.e.token.TokenStoreImpl - Storing token com.kaua.event.driven.infrastructure.es.eventprocessing.token.kafka.KafkaTrackingToken@6011f4e4
+Hibernate: insert into token (processor_name,token,token_class) values (?,?,?)
+Hibernate: delete from token where id=?
+17:52:42.712-0300 [replay-events-request-01-0-C-1] [] [] INFO  c.k.e.d.i.e.e.r.k.KafkaReplayService - Received replay request: ConsumerRecord(topic = replay-events-request, partition = 0, leaderEpoch = 0, offset = 0, CreateTime = 1741726362705, serialized key size = -1, serialized value size = 116, headers = RecordHeaders(headers = [], isReadOnly = false), key = null, value = {"processor_name":"order-aggregate-processor","occurred_on":"2025-03-11T20:52:42.681677Z","offset":0,"positions":{}})
+Hibernate: select ee1_0.event_id,ee1_0.aggregate_id,ee1_0.aggregate_version,ee1_0.data,ee1_0.occurred_on,ee1_0.published,ee1_0.type from events ee1_0 order by ee1_0.occurred_on fetch first ? rows only
+events 1
+17:52:42.726-0300 [replay-events-request-01-0-C-1] [] [] INFO  c.k.e.d.i.e.e.r.k.KafkaReplayService - Replay request processed
+17:52:42.726-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] INFO  c.k.e.d.i.e.e.r.k.KafkaReplayService - Received replay response: ConsumerRecord(topic = replay-events-response-order-aggregate-processor, partition = 0, leaderEpoch = 0, offset = 0, CreateTime = 1741726362724, serialized key size = -1, serialized value size = 325, headers = RecordHeaders(headers = [RecordHeader(key = event_type, value = [99, 111, 109, 46, 107, 97, 117, 97, 46, 101, 118, 101, 110, 116, 46, 100, 114, 105, 118, 101, 110, 46, 105, 110, 102, 114, 97, 115, 116, 114, 117, 99, 116, 117, 114, 101, 46, 101, 115, 46, 116, 101, 115, 116, 115, 46, 118, 97, 108, 117, 101, 115, 46, 79, 114, 100, 101, 114, 67, 114, 101, 97, 116, 101, 100, 69, 118, 101, 110, 116])], isReadOnly = false), key = null, value = {"event_id":"553206b3-9ad8-4d68-bd06-f765f9c74945","event_type":"com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent","occurred_on":"2025-03-11T20:52:39.701939930Z","aggregate_id":"e3bb6e7e-12e9-42c1-8812-0a8d9314edec","aggregate_version":0,"source":"OrderService","trace_id":"traceId","description":"123"})
+17:52:42.727-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] DEBUG c.k.e.d.i.e.e.r.k.KafkaReplayService - Replaying event: OrderCreatedEvent[eventId=553206b3-9ad8-4d68-bd06-f765f9c74945, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-03-11T20:52:39.701939930Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, source=OrderService, traceId=traceId, description=123]
+17:52:42.727-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Adding handler com.kaua.event.driven.infrastructure.uow.UnitOfWork$$Lambda/0x00007fe044b2a5e8 for phase COMMIT
+17:52:42.727-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Adding handler com.kaua.event.driven.infrastructure.uow.UnitOfWork$$Lambda/0x00007fe044b2a810 for phase ROLLBACK
+17:52:42.727-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] DEBUG c.k.e.d.i.uow.AbstractUnitOfWork - Starting Unit Of Work
+17:52:42.727-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Adding handler com.kaua.event.driven.infrastructure.uow.AbstractUnitOfWork$$Lambda/0x00007fe044b26a10 for phase ROLLBACK
+17:52:42.727-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Notifying handlers for phase STARTED
+Processing event: OrderCreatedEvent[eventId=553206b3-9ad8-4d68-bd06-f765f9c74945, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-03-11T20:52:39.701939930Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, source=OrderService, traceId=traceId, description=123]
+17:52:42.727-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] DEBUG c.k.e.d.i.e.e.r.k.KafkaReplayService - Processing event: OrderCreatedEvent[eventId=553206b3-9ad8-4d68-bd06-f765f9c74945, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-03-11T20:52:39.701939930Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, source=OrderService, traceId=traceId, description=123]
+SimpleEventHandlerInvoker.handle
+17:52:42.728-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] DEBUG c.k.e.d.i.e.m.AnnotatedMessageHandling - Handling message OrderCreatedEvent[eventId=553206b3-9ad8-4d68-bd06-f765f9c74945, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-03-11T20:52:39.701939930Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, source=OrderService, traceId=traceId, description=123] with target com.kaua.event.driven.infrastructure.es.tests.OrderEventHandler@18711946
+Order created: OrderCreatedEvent[eventId=553206b3-9ad8-4d68-bd06-f765f9c74945, eventType=com.kaua.event.driven.infrastructure.es.tests.values.OrderCreatedEvent, occurredOn=2025-03-11T20:52:39.701939930Z, aggregateId=e3bb6e7e-12e9-42c1-8812-0a8d9314edec, aggregateVersion=0, source=OrderService, traceId=traceId, description=123]
+after invoke
+17:52:42.728-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] DEBUG c.k.e.d.i.uow.AbstractUnitOfWork - Committing Unit Of Work
+17:52:42.728-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Notifying handlers for phase PREPARE_COMMIT
+17:52:42.728-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Notifying handlers for phase COMMIT
+17:52:42.728-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Notifying handlers for phase AFTER_COMMIT
+17:52:42.728-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Notifying handlers for phase CLEANUP
+17:52:42.728-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] DEBUG c.k.e.d.i.uow.ProcessingContext - Notifying handlers for phase CLOSED
+17:52:42.728-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] DEBUG c.k.e.d.i.uow.CurrentUnitOfWork - Removed the UnitOfWork from the current thread
+Result message replay: com.kaua.event.driven.infrastructure.uow.ResultMessage@22825c3
+result message result replay: null
+17:52:42.728-0300 [replay-events-response-order-aggregate-processor-01-0-C-1] [] [] INFO  c.k.e.d.i.e.e.r.k.KafkaReplayService - Replay response processed
+17:52:46.285-0300 [event-processor] [] [] DEBUG c.k.e.d.i.e.e.m.KafkaMessageSource - No records found for tracking token com.kaua.event.driven.infrastructure.es.eventprocessing.token.kafka.KafkaTrackingToken@61e4798
+17:52:46.285-0300 [event-processor] [] [] DEBUG c.k.e.d.i.e.e.t.TrackingProcessor - No records found for tracking token com.kaua.event.driven.infrastructure.es.eventprocessing.token.kafka.KafkaTrackingToken@61e4798
+17:52:46.286-0300 [event-processor] [] [] DEBUG c.k.e.d.i.e.e.m.KafkaMessageSource - Reading events from Kafka for tracking token com.kaua.event.driven.infrastructure.es.eventprocessing.token.kafka.KafkaTrackingToken@61e4798
+[events-0]
+Token partition positions: {events-0=0}
+17:52:46.319-0300 [event-processor] [] [] INFO  c.k.e.d.i.e.e.m.KafkaMessageSource - Seeking topic-partition [events-0] with offset [1]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1. CommandGatewayImpl chama o EventSourcedAggregate (que é o agregado baseado em eventos) para executar o comando.
 2. Dentro desse código chamamos o event store para ler os eventos
 3. Lemos os eventos, após ter todos os eventos chamamos o EventSourcedAggregate initialize (with aggregatefactory create aggregate root, etc.)

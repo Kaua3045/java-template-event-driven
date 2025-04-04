@@ -1,14 +1,13 @@
 package com.kaua.event.driven.infrastructure.es.command.impl;
 
 import com.kaua.event.driven.domain.commands.Command;
-import com.kaua.event.driven.infrastructure.es.aggregates.model.AggregateModel;
-import com.kaua.event.driven.infrastructure.es.command.CommandHandlerImpl;
 import com.kaua.event.driven.infrastructure.es.command.callback.CommandCallBack;
+import com.kaua.event.driven.infrastructure.es.message.MessageHandler;
 import com.kaua.event.driven.infrastructure.uow.RollbackConfiguration;
 import com.kaua.event.driven.infrastructure.uow.TransactionManager;
 import jakarta.annotation.Nonnull;
 
-import java.util.Map;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -26,8 +25,8 @@ public class AsyncCommandBus extends SimpleCommandBus {
     }
 
     @Override
-    public <C, R> void handle(Command command, CommandHandlerImpl<?> aHandler, CommandCallBack<C, R> callback, Object aggregate) {
-        executorService.execute(() -> super.handle(command, aHandler, callback, aggregate));
+    public <C, R> void handle(Command command, MessageHandler<? super Command> aHandler, CommandCallBack<C, R> callback) {
+        executorService.execute(() -> super.handle(command, aHandler, callback));
     }
 
     public static class Builder extends SimpleCommandBus.Builder {
@@ -42,14 +41,9 @@ public class AsyncCommandBus extends SimpleCommandBus {
             return this;
         }
 
-        @Override
-        public Builder aggregates(@Nonnull Map<Class<?>, AggregateModel<?>> aggregates) {
-            super.aggregates(aggregates);
-            return this;
-        }
 
         @Override
-        public Builder commandHandlers(@Nonnull Map<Class<?>, CommandHandlerImpl<?>> commandHandlers) {
+        public Builder commandHandlers(List<MessageHandler<? super Command>> commandHandlers) {
             super.commandHandlers(commandHandlers);
             return this;
         }
